@@ -190,3 +190,7 @@ stijnify/stijnify.Android/bin/Debug/*
 stijnify/stijnify.Android/bin/Release/
 stijnify/stijnify.Android/obj/Debug/
 stijnify/stijnify.Android/bin/Release/*
+
+stijnify/stijnify/bin/Debug/netstandard2.0/
+
+stijnify/stijnify/obj/Debug/netstandard2.0/
