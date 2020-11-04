@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="stijnify.Views.SettingsPage">
+
+    <NavigationPage.TitleView BackgroundColor="#0E0F11">
+        <Label Text="Settings" HorizontalOptions="Center" FontSize="25" TextColor="White" />
+    </NavigationPage.TitleView>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Folders" FontSize="30" FontAttributes="Bold"></Label>
+            <Button x:Name="AddFolder" Text="Add Folder" Clicked="AddFolder_Clicked"></Button>
+            <ListView x:Name="addedFolders"></ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

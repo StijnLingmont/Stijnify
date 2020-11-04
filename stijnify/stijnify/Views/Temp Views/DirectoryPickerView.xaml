@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="stijnify.Views.Temp_Views.DirectoryPickerView">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#36393F">
+            <StackLayout>
+                <Label Text="Choose a folder" FontSize="20" />
+                <ListView x:Name="directoriesList"
+                      ItemTapped="directoriesList_ItemTapped"
+                      ></ListView>
+            </StackLayout>
+            <Grid Margin="0, 0, 0, 5">
+                <Button Grid.Row="0" Grid.Column="0" Text="Cancel" HeightRequest="70" FontSize="25" BackgroundColor="#36393F" Clicked="CancelDialog"></Button>
+                <Button Grid.Row="0" Grid.Column="1" Text="Select" HeightRequest="70" FontSize="25" BackgroundColor="#36393F" Clicked="SelectDirectory"></Button>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

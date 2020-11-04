@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wKmcJtwEkLTys+CsEwpJ0WPawtAFxQP0I0W5qiCMHHiba4too+mPkNTWBRrF6igRAWf5QImCxeS6FI/9lrtNpA==",
+  "dgSpecHash": "58Xh5Jp7FI/KjlwRFs3pn2VxayaT5CRI+Te7Ly0gZyiS47VHT0v0ZPvLOEp/UWQEgUFXXyUcxtg5dcSjomWIQw==",
   "success": true,
   "projectFilePath": "D:\\Stijn\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify.Android\\stijnify.Android.csproj",
   "expectedPackageFiles": [
@@ -42,7 +42,8 @@
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.android.support.versionedparcelable\\28.0.0.3\\xamarin.android.support.versionedparcelable.28.0.0.3.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.android.support.viewpager\\28.0.0.3\\xamarin.android.support.viewpager.28.0.0.3.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.5.3.2\\xamarin.essentials.1.5.3.2.nupkg.sha512",
-    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\4.6.0.1141\\xamarin.forms.4.6.0.1141.nupkg.sha512"
+    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\4.6.0.1141\\xamarin.forms.4.6.0.1141.nupkg.sha512",
+    "C:\\Users\\Werk\\.nuget\\packages\\xamarin.plugin.filepicker\\2.1.41\\xamarin.plugin.filepicker.2.1.41.nupkg.sha512"
   ],
   "logs": []
 }

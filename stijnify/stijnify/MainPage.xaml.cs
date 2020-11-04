@@ -1,18 +1,23 @@
-﻿using System;
+﻿
+using Plugin.FilePicker;
+using stijnify.Interfaces;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace stijnify
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : TabbedPage
     {
         public MainPage()
         {
             InitializeComponent();
+
+            //TODO: REMOVE THIS! THIS IS TEMP FOR TESTING
+            Preferences.Clear();
         }
     }
 }
