@@ -50,6 +50,10 @@
               "target": "Package",
               "version": "[6.0.1, )"
             },
+            "ReactiveUI": {
+              "target": "Package",
+              "version": "[12.1.5, )"
+            },
             "Xamarin.Essentials": {
               "target": "Package",
               "version": "[1.5.3.2, )"
@@ -113,6 +117,10 @@
             "Plugin.Permissions": {
               "target": "Package",
               "version": "[6.0.1, )"
+            },
+            "ReactiveUI": {
+              "target": "Package",
+              "version": "[12.1.5, )"
             },
             "Xamarin.Essentials": {
               "target": "Package",

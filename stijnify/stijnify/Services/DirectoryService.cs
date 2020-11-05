@@ -13,11 +13,6 @@ namespace stijnify.Services
     {
         public static async Task<string> GetRootDirectory()
         {
-            //bool permissionStatus = await PermissionService.GrantReadPermission();
-
-            //if (permissionStatus == false)
-            //    Thread.CurrentThread.Abort();
-
             return DependencyService.Get<IExternalStorage>().GetExternalStorage();
         }
     }

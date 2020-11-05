@@ -11,7 +11,17 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="songList"></ListView>
+            <ListView x:Name="songListView" ItemsSource="{Binding SongList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="15, 0, 15, 0">
+                                <Label Text="{Binding Name}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

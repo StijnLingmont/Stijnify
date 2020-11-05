@@ -14,6 +14,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 using stijnify.Services;
+using stijnify.ViewModels;
+using stijnify.Model;
 
 namespace stijnify.Views
 {
@@ -27,6 +29,8 @@ namespace stijnify.Views
         /// </summary>
         string _RootFolder;
 
+        HomePageModel ViewModel;
+
         #endregion
 
         public HomePage()
@@ -34,6 +38,8 @@ namespace stijnify.Views
             InitializeComponent();
 
             _RootFolder = DirectoryService.GetRootDirectory().Result;
+
+            BindingContext = ViewModel = new HomePageModel();
 
             GetAllFiles();
         }
@@ -45,8 +51,7 @@ namespace stijnify.Views
         {
             try
             {
-                //TODO: Instead of adding here use binding
-                ObservableCollection<string> allSongs = new ObservableCollection<string>();
+                ObservableCollection<SongInfoModel> allSongs = new ObservableCollection<SongInfoModel>();
 
                 //Get all selected folders
                 var folders = Preferences.Get("folders", null);
@@ -64,28 +69,11 @@ namespace stijnify.Views
 
                     //Add every item in the list of songs
                     foreach (string file in allFiles)
-                        allSongs.Add(file);
+                        allSongs.Add(new SongInfoModel(Path.GetFileNameWithoutExtension(file), file));
                 }
 
-                Console.WriteLine(allSongs);
+                ViewModel.SongList = allSongs;
 
-                //TODO: Get list of all folders
-                //TODO: Get for every folder in the list all the files
-                //string songsReadPath = _RootFolder + "/Music/Serie themes/";
-
-                //var allFiles = Directory.GetFiles(songsReadPath);
-
-                //Go trough all files
-                //foreach (var file in allFiles)
-                //{
-                //    //Check if file is an supported file
-                //    if (Path.GetExtension(file) == ".mp3")
-                //    {
-                //        allSongs.Add(file);
-                //    }
-                //}
-
-                songList.ItemsSource = allSongs;
             }
             catch (Exception ex)
             {
