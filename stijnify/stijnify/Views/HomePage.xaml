@@ -10,6 +10,8 @@
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <ListView x:Name="songList"></ListView>
+        <StackLayout>
+            <ListView x:Name="songList"></ListView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

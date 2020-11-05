@@ -45,11 +45,15 @@ namespace stijnify.Views
         /// </summary>
         void SetFolderList()
         {
-            var folders = Preferences.Get("folders", null);
+            if(Preferences.ContainsKey("folders"))
+            {
+                var folders = Preferences.Get("folders", null);
 
-            ObservableCollection<string> folderList = new ObservableCollection<string>(folders.Split(','));
+                ObservableCollection<string> folderList = new ObservableCollection<string>(folders.Split(','));
 
-            addedFolders.ItemsSource = folderList;
+                addedFolders.ItemsSource = folderList;
+            }
+
         }
     }
 }

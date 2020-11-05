@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "oUROxW7zIMGbl868qsqYXvSy2rYW8vG3VvZzn4PvipeNuJUFv5gaKCu1G2s9rVi0inEwQOFDzvZV/og7AqHA+g==",
+  "dgSpecHash": "opA7EQ6VXWWoPBKew2LYofocAuwrSJYHEK+vMz/IoWqH3wUeUlAZvcGo3OAgDT93mNt6g9gXQ96IAeBCxbD6AA==",
   "success": true,
   "projectFilePath": "D:\\Stijn\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\stijnify.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Werk\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Werk\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Werk\\.nuget\\packages\\plugin.permissions\\6.0.1\\plugin.permissions.6.0.1.nupkg.sha512",
     "C:\\Users\\Werk\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.5.3.2\\xamarin.essentials.1.5.3.2.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\4.6.0.1141\\xamarin.forms.4.6.0.1141.nupkg.sha512",

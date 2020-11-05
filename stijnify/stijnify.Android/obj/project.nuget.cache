@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "58Xh5Jp7FI/KjlwRFs3pn2VxayaT5CRI+Te7Ly0gZyiS47VHT0v0ZPvLOEp/UWQEgUFXXyUcxtg5dcSjomWIQw==",
+  "dgSpecHash": "Ncb1NObY60zJ7Iw0518hkACCpHF+U+WPKu4/sP0pFB1MoJZkc/OhjWkykJQDnMF3vik6/y9FgKtmpPfBEdBvdA==",
   "success": true,
   "projectFilePath": "D:\\Stijn\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify.Android\\stijnify.Android.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Werk\\.nuget\\packages\\plugin.currentactivity\\2.1.0.4\\plugin.currentactivity.2.1.0.4.nupkg.sha512",
+    "C:\\Users\\Werk\\.nuget\\packages\\plugin.permissions\\6.0.1\\plugin.permissions.6.0.1.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.android.arch.core.common\\1.1.1.3\\xamarin.android.arch.core.common.1.1.1.3.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.android.arch.core.runtime\\1.1.1.3\\xamarin.android.arch.core.runtime.1.1.1.3.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.android.arch.lifecycle.common\\1.1.1.3\\xamarin.android.arch.lifecycle.common.1.1.1.3.nupkg.sha512",

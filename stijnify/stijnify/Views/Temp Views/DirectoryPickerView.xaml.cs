@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -29,7 +30,10 @@ namespace stijnify.Views.Temp_Views
             InitializeComponent();
 
             //Set root folder as selected folder
-            var _SelectedFolder = DependencyService.Get<IExternalStorage>().GetExternalStorage();
+            _SelectedFolder = DependencyService.Get<IExternalStorage>().GetExternalStorage();
+            
+            if(_SelectedFolder == null)
+                Thread.CurrentThread.Abort();
 
             GetFolderStructure();
         }

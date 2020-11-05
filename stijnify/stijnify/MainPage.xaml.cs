@@ -1,10 +1,14 @@
 ﻿
 using Plugin.FilePicker;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using stijnify.Interfaces;
+using stijnify.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Xamarin.Essentials;
+using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 
@@ -15,9 +19,6 @@ namespace stijnify
         public MainPage()
         {
             InitializeComponent();
-
-            //TODO: REMOVE THIS! THIS IS TEMP FOR TESTING
-            Preferences.Clear();
         }
     }
 }

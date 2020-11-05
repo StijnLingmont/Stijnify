@@ -7,7 +7,9 @@
              android:TabbedPage.ToolbarPlacement="Bottom"
              BarBackgroundColor="#0E0F11"
              UnselectedTabColor="#BBBBBB"
-             SelectedTabColor="#ffffff">
+             SelectedTabColor="#ffffff"
+             NavigationPage.HasNavigationBar="false"
+            >
 
     <TabbedPage.Children>
         <NavigationPage Title="Home" Icon="home" BarBackgroundColor="#0E0F11">
