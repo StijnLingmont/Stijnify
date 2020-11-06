@@ -4,11 +4,13 @@
              x:Class="stijnify.Views.AskPermission"
              NavigationPage.HasNavigationBar="false">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="#36393F">
             <Label Text="Please accept the permissions to acces your files for this app!"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Button Text="Grant Permission" Clicked="AskPermission_Clicked"></Button>
+                HorizontalOptions="CenterAndExpand"
+                TextColor="White"
+                   />
+            <Button Text="Grant Permission" Clicked="AskPermission_Clicked" TextColor="White"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

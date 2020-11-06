@@ -5,14 +5,14 @@
     <ContentPage.Content>
         <StackLayout BackgroundColor="#36393F">
             <StackLayout>
-                <Label Text="Choose a folder" FontSize="20" />
+                <Label Text="Choose a folder" FontSize="20" TextColor="white" />
                 <ListView x:Name="directoriesList"
                       ItemTapped="directoriesList_ItemTapped"
                       ></ListView>
             </StackLayout>
             <Grid Margin="0, 0, 0, 5">
-                <Button Grid.Row="0" Grid.Column="0" Text="Cancel" HeightRequest="70" FontSize="25" BackgroundColor="#36393F" Clicked="CancelDialog"></Button>
-                <Button Grid.Row="0" Grid.Column="1" Text="Select" HeightRequest="70" FontSize="25" BackgroundColor="#36393F" Clicked="SelectDirectory"></Button>
+                <Button Grid.Row="0" Grid.Column="0" Text="Cancel" HeightRequest="70" FontSize="25" BackgroundColor="#36393F" TextColor="white" Clicked="CancelDialog"></Button>
+                <Button Grid.Row="0" Grid.Column="1" Text="Select" HeightRequest="70" FontSize="25" BackgroundColor="#36393F" TextColor="white" Clicked="SelectDirectory"></Button>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

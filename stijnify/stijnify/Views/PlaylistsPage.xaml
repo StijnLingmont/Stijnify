@@ -7,7 +7,7 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="#36393F">
             <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />

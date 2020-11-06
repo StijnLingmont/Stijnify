@@ -10,13 +10,13 @@
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="#36393F">
             <ListView x:Name="songListView" ItemsSource="{Binding SongList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" Padding="15, 0, 15, 0">
-                                <Label Text="{Binding Name}"/>
+                                <Label Text="{Binding Name}" TextColor="White" VerticalOptions="Center"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
