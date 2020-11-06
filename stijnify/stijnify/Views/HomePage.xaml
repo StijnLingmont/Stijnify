@@ -11,7 +11,7 @@
 
     <ContentPage.Content>
         <StackLayout BackgroundColor="#36393F">
-            <ListView x:Name="songListView" ItemsSource="{Binding SongList}">
+            <ListView x:Name="songListView" ItemsSource="{Binding SongList}" IsPullToRefreshEnabled="True" Refreshing="songListView_Refreshing">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

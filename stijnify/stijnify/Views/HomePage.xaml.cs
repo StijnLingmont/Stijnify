@@ -45,13 +45,14 @@ namespace stijnify.Views
         }
 
         /// <summary>
-        /// Get All Files from a Static Folder from my own phone.
+        /// Get All Files from the folders chosen in the Settings
         /// </summary>
         void GetAllFiles()
         {
             try
             {
                 ObservableCollection<SongInfoModel> allSongs = new ObservableCollection<SongInfoModel>();
+                ObservableCollection<string> folderList;
 
                 //Get all selected folders
                 var folders = Preferences.Get("folders", null);
@@ -59,7 +60,7 @@ namespace stijnify.Views
                 if (folders == null)
                     return;
 
-                ObservableCollection<string> folderList = new ObservableCollection<string>(folders.Split(','));
+                folderList = new ObservableCollection<string>(folders.Split(','));
 
                 //Go trough every folder and get all files
                 foreach(string folder in folderList)
@@ -79,6 +80,20 @@ namespace stijnify.Views
             {
                 Console.WriteLine(ex.Message);
             };
+        }
+
+        /// <summary>
+        /// Event for refresh song list.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void songListView_Refreshing(object sender, EventArgs e)
+        {
+            var listView = (ListView)sender;
+
+            GetAllFiles();
+
+            listView.EndRefresh();
         }
     }
 }
