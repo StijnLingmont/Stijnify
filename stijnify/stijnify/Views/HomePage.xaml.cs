@@ -47,7 +47,7 @@ namespace stijnify.Views
         /// <summary>
         /// Get All Files from the folders chosen in the Settings
         /// </summary>
-        void GetAllFiles()
+        void GetAllFiles(string searchText = null)
         {
             try
             {
@@ -73,7 +73,12 @@ namespace stijnify.Views
                         allSongs.Add(new SongInfoModel(Path.GetFileNameWithoutExtension(file), file));
                 }
 
-                ViewModel.SongList = allSongs;
+                //Return the full list when user is not searching
+                if (String.IsNullOrWhiteSpace(searchText))
+                    ViewModel.SongList = allSongs;
+
+                //Retrieve the searched results
+                ViewModel.SongList = new ObservableCollection<SongInfoModel>(allSongs.Where(song => song.Name.ToLower().Contains(searchText.ToLower())));
 
             }
             catch (Exception ex)
@@ -94,6 +99,11 @@ namespace stijnify.Views
             GetAllFiles();
 
             listView.EndRefresh();
+        }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            GetAllFiles(e.NewTextValue);
         }
     }
 }

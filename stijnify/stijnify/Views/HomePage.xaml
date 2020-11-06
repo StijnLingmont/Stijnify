@@ -11,6 +11,14 @@
 
     <ContentPage.Content>
         <StackLayout BackgroundColor="#36393F">
+            <SearchBar Placeholder="Search..." 
+                       PlaceholderColor="Black" 
+                       TextColor="Black" 
+                       CancelButtonColor="White" 
+                       BackgroundColor="White"
+                       TextChanged="SearchBar_TextChanged"
+                       ></SearchBar>
+            
             <ListView x:Name="songListView" ItemsSource="{Binding SongList}" IsPullToRefreshEnabled="True" Refreshing="songListView_Refreshing">
                 <ListView.ItemTemplate>
                     <DataTemplate>
