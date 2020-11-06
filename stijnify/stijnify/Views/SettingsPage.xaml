@@ -8,10 +8,35 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Folders" FontSize="30" FontAttributes="Bold"></Label>
-            <Button x:Name="AddFolder" Text="Add Folder" Clicked="AddFolder_Clicked"></Button>
-            <ListView x:Name="addedFolders"></ListView>
+        <StackLayout BackgroundColor="#36393F">
+            <Label Text="Folders" FontSize="30" FontAttributes="Bold" TextColor="White"></Label>
+            <Button x:Name="AddFolder" Text="Add Folder" Clicked="AddFolder_Clicked" TextColor="#36393F"></Button>
+            
+            <!-- List of all added folders -->
+            <ListView x:Name="addedFolders" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10, 0, 10, 0" x:Name="folder">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="20" />
+                                </Grid.ColumnDefinitions>
+                                
+                                
+                                <Label x:Name="folderPath" Text="{Binding}" Grid.Column="0" Grid.Row="0" TextColor="White" VerticalOptions="Center"></Label>
+                                <ImageButton Source="delete"
+                                    Grid.Column="1" Grid.Row="0"
+                                    VerticalOptions="CenterAndExpand" 
+                                    BackgroundColor="#36393F"
+                                    CommandParameter="{Binding Source={x:Reference folder}, Path=BindingContext}"
+                                    Clicked="FolderDelete_Clicked"
+                                />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
