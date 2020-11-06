@@ -105,5 +105,34 @@ namespace stijnify.Views
         {
             GetAllFiles(e.NewTextValue);
         }
+
+        private async void SongOptions_Clicked(object sender, EventArgs e)
+        {
+            SongInfoModel songInfo = (SongInfoModel)((ImageButton)sender).CommandParameter;
+            var response = await DisplayActionSheet("Song Options", "Cancel", null,"Delete file" ,"Play", "Add To Queue");
+            string searchText = null;
+
+            if (response.ToLower() == "delete file")
+                await DeleteFile(songInfo.Path);
+
+            if (!String.IsNullOrEmpty(songSearchBar.Text))
+                searchText = songSearchBar.Text;
+
+            GetAllFiles(searchText);
+        }
+
+        /// <summary>
+        /// Delete a song
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private async Task<bool> DeleteFile(string path)
+        {
+            bool response = await DisplayAlert("Delete song", "Are you sure you want to delete this song?", "Delete", "Cancel");
+            if(response)
+                File.Delete(path);
+
+            return true;
+        }
     }
 }
