@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="stijnify.Views.Component.MediaPlayer"
+             AbsoluteLayout.LayoutBounds="1, 1, 1, 0.23" 
+             AbsoluteLayout.LayoutFlags="All"
+             >
+  <ContentView.Content>
+        <Grid BackgroundColor="#262A33">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            
+            <ImageButton Source="previous"
+                        Grid.Column="1" Grid.Row="0"
+                        Padding="0, 20, 0, 20"
+                        VerticalOptions="FillAndExpand"
+                        BackgroundColor="Transparent"
+            />
+            <ImageButton Source="{Binding PlayPause}}"
+                        Grid.Column="2" Grid.Row="0"
+                        Padding="0, 20, 0, 20"
+                        VerticalOptions="FillAndExpand"
+                        BackgroundColor="Transparent"
+                        Clicked="PauseResume_Clicked"
+            />
+            <ImageButton Source="next"
+                        Grid.Column="3" Grid.Row="0"
+                        Padding="0, 20, 0, 20"
+                        VerticalOptions="FillAndExpand"
+                        BackgroundColor="Transparent"
+            />
+        </Grid>
+  </ContentView.Content>
+</ContentView>

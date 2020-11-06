@@ -23,14 +23,14 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "monoandroid90"
+          "monoandroid11.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "monoandroid90": {
+          "monoandroid11.0": {
             "projectReferences": {
               "D:\\Stijn\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\stijnify.csproj": {
                 "projectPath": "D:\\Stijn\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\stijnify.csproj"
@@ -40,11 +40,19 @@
         }
       },
       "frameworks": {
-        "monoandroid90": {
+        "monoandroid11.0": {
           "dependencies": {
             "Plugin.CurrentActivity": {
               "target": "Package",
               "version": "[2.1.0.4, )"
+            },
+            "Plugin.MediaManager": {
+              "target": "Package",
+              "version": "[1.0.4, )"
+            },
+            "Plugin.MediaManager.Forms": {
+              "target": "Package",
+              "version": "[1.0.4, )"
             },
             "Plugin.Permissions": {
               "target": "Package",
@@ -113,6 +121,14 @@
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
+            },
+            "Plugin.MediaManager": {
+              "target": "Package",
+              "version": "[1.0.4, )"
+            },
+            "Plugin.MediaManager.Forms": {
+              "target": "Package",
+              "version": "[1.0.4, )"
             },
             "Plugin.Permissions": {
               "target": "Package",

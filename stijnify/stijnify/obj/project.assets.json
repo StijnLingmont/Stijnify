@@ -47,6 +47,28 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
+      "Plugin.MediaManager/1.0.4": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/MediaManager.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MediaManager.dll": {}
+        }
+      },
+      "Plugin.MediaManager.Forms/1.0.4": {
+        "type": "package",
+        "dependencies": {
+          "Plugin.MediaManager": "1.0.4",
+          "Xamarin.Forms": "4.5.0.657"
+        },
+        "compile": {
+          "lib/netstandard2.0/MediaManager.Forms.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MediaManager.Forms.dll": {}
+        }
+      },
       "Plugin.Permissions/6.0.1": {
         "type": "package",
         "dependencies": {
@@ -689,6 +711,91 @@
         "lib/netstandard1.0/_._",
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
+      ]
+    },
+    "Plugin.MediaManager/1.0.4": {
+      "sha512": "oU0Lqt6ixOKKSZxlSuAci/rO+GO6m/0jREUIl9SWaTAgMs0dkASpY/EKT3lHtdiLiIIuGc4YLtjGfbcMEEMLDw==",
+      "type": "package",
+      "path": "plugin.mediamanager/1.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "icon.png",
+        "lib/monoandroid10.0/MediaManager.dll",
+        "lib/monoandroid10.0/MediaManager.pdb",
+        "lib/monoandroid10.0/MediaManager.xml",
+        "lib/net472/MediaManager.dll",
+        "lib/net472/MediaManager.pdb",
+        "lib/net472/MediaManager.xml",
+        "lib/netcoreapp3.1/MediaManager.dll",
+        "lib/netcoreapp3.1/MediaManager.pdb",
+        "lib/netcoreapp3.1/MediaManager.xml",
+        "lib/netstandard2.0/MediaManager.dll",
+        "lib/netstandard2.0/MediaManager.pdb",
+        "lib/netstandard2.0/MediaManager.xml",
+        "lib/tizen40/MediaManager.dll",
+        "lib/tizen40/MediaManager.pdb",
+        "lib/tizen40/MediaManager.xml",
+        "lib/uap10.0.17763/MediaManager.dll",
+        "lib/uap10.0.17763/MediaManager.pdb",
+        "lib/uap10.0.17763/MediaManager.pri",
+        "lib/uap10.0.17763/MediaManager.xml",
+        "lib/uap10.0.17763/MediaManager/MediaManager.xr.xml",
+        "lib/xamarinios10/MediaManager.dll",
+        "lib/xamarinios10/MediaManager.pdb",
+        "lib/xamarinios10/MediaManager.xml",
+        "lib/xamarinmac20/MediaManager.dll",
+        "lib/xamarinmac20/MediaManager.pdb",
+        "lib/xamarinmac20/MediaManager.xml",
+        "lib/xamarintvos10/MediaManager.dll",
+        "lib/xamarintvos10/MediaManager.pdb",
+        "lib/xamarintvos10/MediaManager.xml",
+        "plugin.mediamanager.1.0.4.nupkg.sha512",
+        "plugin.mediamanager.nuspec",
+        "readme.txt"
+      ]
+    },
+    "Plugin.MediaManager.Forms/1.0.4": {
+      "sha512": "WTRq3400lC8y3oY7xehIN1gwiU+7RQQN1SLMLU4IBmsVhzNDozLvl7M4AlZHi3RjiifLKgVGQ6UJgcWWgZhEMA==",
+      "type": "package",
+      "path": "plugin.mediamanager.forms/1.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "icon.png",
+        "lib/monoandroid10.0/MediaManager.Forms.dll",
+        "lib/monoandroid10.0/MediaManager.Forms.pdb",
+        "lib/monoandroid10.0/MediaManager.Forms.xml",
+        "lib/net472/MediaManager.Forms.dll",
+        "lib/net472/MediaManager.Forms.pdb",
+        "lib/net472/MediaManager.Forms.xml",
+        "lib/netcoreapp3.1/MediaManager.Forms.dll",
+        "lib/netcoreapp3.1/MediaManager.Forms.pdb",
+        "lib/netcoreapp3.1/MediaManager.Forms.xml",
+        "lib/netstandard2.0/MediaManager.Forms.dll",
+        "lib/netstandard2.0/MediaManager.Forms.pdb",
+        "lib/netstandard2.0/MediaManager.Forms.xml",
+        "lib/tizen40/MediaManager.Forms.dll",
+        "lib/tizen40/MediaManager.Forms.pdb",
+        "lib/tizen40/MediaManager.Forms.xml",
+        "lib/uap10.0.17763/MediaManager.Forms.dll",
+        "lib/uap10.0.17763/MediaManager.Forms.pdb",
+        "lib/uap10.0.17763/MediaManager.Forms.pri",
+        "lib/uap10.0.17763/MediaManager.Forms.xml",
+        "lib/xamarinios10/MediaManager.Forms.dll",
+        "lib/xamarinios10/MediaManager.Forms.pdb",
+        "lib/xamarinios10/MediaManager.Forms.xml",
+        "lib/xamarinmac20/MediaManager.Forms.dll",
+        "lib/xamarinmac20/MediaManager.Forms.pdb",
+        "lib/xamarinmac20/MediaManager.Forms.xml",
+        "lib/xamarintvos10/MediaManager.Forms.dll",
+        "lib/xamarintvos10/MediaManager.Forms.pdb",
+        "lib/xamarintvos10/MediaManager.Forms.xml",
+        "plugin.mediamanager.forms.1.0.4.nupkg.sha512",
+        "plugin.mediamanager.forms.nuspec",
+        "readme.txt"
       ]
     },
     "Plugin.Permissions/6.0.1": {
@@ -2968,6 +3075,8 @@
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
       "NETStandard.Library >= 2.0.3",
+      "Plugin.MediaManager >= 1.0.4",
+      "Plugin.MediaManager.Forms >= 1.0.4",
       "Plugin.Permissions >= 6.0.1",
       "ReactiveUI >= 12.1.5",
       "Xamarin.Essentials >= 1.5.3.2",
@@ -3022,6 +3131,14 @@
             "target": "Package",
             "version": "[2.0.3, )",
             "autoReferenced": true
+          },
+          "Plugin.MediaManager": {
+            "target": "Package",
+            "version": "[1.0.4, )"
+          },
+          "Plugin.MediaManager.Forms": {
+            "target": "Package",
+            "version": "[1.0.4, )"
           },
           "Plugin.Permissions": {
             "target": "Package",

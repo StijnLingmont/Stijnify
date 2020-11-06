@@ -4,7 +4,7 @@ using System.Text;
 
 namespace stijnify.Model
 {
-    class SongInfoModel
+    public class SongInfoModel
     {
         /// <summary>
         /// Name of the song

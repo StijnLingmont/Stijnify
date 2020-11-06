@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:component="clr-namespace:stijnify.Views.Component"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="stijnify.Views.HomePage"
              Title="Home"
@@ -10,8 +11,10 @@
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <StackLayout BackgroundColor="#36393F">
-            <SearchBar Placeholder="Search..." 
+        <AbsoluteLayout BackgroundColor="#36393F">
+            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 0.77" AbsoluteLayout.LayoutFlags="All">
+                <!-- Search Bar -->
+                <SearchBar Placeholder="Search..." 
                        PlaceholderColor="Black" 
                        TextColor="Black" 
                        CancelButtonColor="Black" 
@@ -19,30 +22,35 @@
                        TextChanged="SearchBar_TextChanged"
                        x:Name="songSearchBar"
                        ></SearchBar>
-            
-            <ListView x:Name="songListView" ItemsSource="{Binding SongList}" IsPullToRefreshEnabled="True" Refreshing="songListView_Refreshing">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid x:Name="song" Padding="10, 0, 10, 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="20" />
-                                </Grid.ColumnDefinitions>
 
-                                <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="0" TextColor="White" VerticalOptions="Center"></Label>
-                                <ImageButton Source="options"
+                <!-- Song List -->
+                <ListView x:Name="songListView" ItemsSource="{Binding SongList}" IsPullToRefreshEnabled="True" Refreshing="songListView_Refreshing" ItemTapped="PlaySong_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid x:Name="song" Padding="10, 0, 10, 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="0" TextColor="White" VerticalOptions="Center"></Label>
+                                    <ImageButton Source="options"
                                     Grid.Column="1" Grid.Row="0"
                                     VerticalOptions="CenterAndExpand" 
-                                    BackgroundColor="#36393F"
+                                    BackgroundColor="Transparent"
                                     CommandParameter="{Binding Source={x:Reference song}, Path=BindingContext}"
                                     Clicked="SongOptions_Clicked"
                                 />
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <!-- MediaPlayer -->
+            <component:MediaPlayer />
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

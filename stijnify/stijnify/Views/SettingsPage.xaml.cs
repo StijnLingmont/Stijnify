@@ -89,8 +89,12 @@ namespace stijnify.Views
                 if (folderExcists)
                     folders.Remove(selectedItem);
 
-                //Set list in Prefferences
-                Preferences.Set("folders", string.Join(",", folders));
+                //Check if there is still an item left
+                if (folders.Count > 0)
+                    Preferences.Set("folders", string.Join(",", folders));
+                else
+                    Preferences.Remove("folders");
+
                 addedFolders.ItemsSource = folders;
             }
         }

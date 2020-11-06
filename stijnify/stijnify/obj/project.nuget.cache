@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mzMEqX78MPllvLCMq7r3P/ICb1j9X4OVn9b+kXv0I9sDn0+BxRCB0EV+1qdATYWoULW2wDrTrmPwSjyD/xhWhA==",
+  "dgSpecHash": "fxWsiCP2VArbdshv9u1nPXjEObvWcO8INFBUi102lPt1CRSG0vkQE6LH5X52H+O+BbEWeOeNCaEnsROo3T1JoQ==",
   "success": true,
   "projectFilePath": "D:\\Stijn\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\stijnify.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,8 @@
     "C:\\Users\\Werk\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Werk\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Werk\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Werk\\.nuget\\packages\\plugin.mediamanager\\1.0.4\\plugin.mediamanager.1.0.4.nupkg.sha512",
+    "C:\\Users\\Werk\\.nuget\\packages\\plugin.mediamanager.forms\\1.0.4\\plugin.mediamanager.forms.1.0.4.nupkg.sha512",
     "C:\\Users\\Werk\\.nuget\\packages\\plugin.permissions\\6.0.1\\plugin.permissions.6.0.1.nupkg.sha512",
     "C:\\Users\\Werk\\.nuget\\packages\\reactiveui\\12.1.5\\reactiveui.12.1.5.nupkg.sha512",
     "C:\\Users\\Werk\\.nuget\\packages\\splat\\9.6.1\\splat.9.6.1.nupkg.sha512",

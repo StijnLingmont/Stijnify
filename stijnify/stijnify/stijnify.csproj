@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -11,6 +12,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Plugin.MediaManager" Version="1.0.4" />
+    <PackageReference Include="Plugin.MediaManager.Forms" Version="1.0.4" />
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
     <PackageReference Include="ReactiveUI" Version="12.1.5" />
     <PackageReference Include="Xamarin.Forms" Version="4.6.0.1141" />
@@ -26,6 +29,9 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Views\AskPermission.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Component\MediaPlayer.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\HomePage.xaml">

@@ -16,6 +16,7 @@ using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 using stijnify.Services;
 using stijnify.ViewModels;
 using stijnify.Model;
+using MediaManager.Playback;
 
 namespace stijnify.Views
 {
@@ -37,7 +38,7 @@ namespace stijnify.Views
         {
             InitializeComponent();
 
-            _RootFolder = DirectoryService.GetRootDirectory().Result;
+            _RootFolder = FileService.GetRootDirectory().Result;
 
             BindingContext = ViewModel = new HomePageModel();
 
@@ -52,7 +53,7 @@ namespace stijnify.Views
             try
             {
                 ObservableCollection<SongInfoModel> allSongs = new ObservableCollection<SongInfoModel>();
-                ObservableCollection<string> folderList;
+                List<string> folderList;
 
                 //Get all selected folders
                 var folders = Preferences.Get("folders", null);
@@ -60,18 +61,11 @@ namespace stijnify.Views
                 if (folders == null)
                     return;
 
-                folderList = new ObservableCollection<string>(folders.Split(','));
+                //Convert string in List of strings
+                folderList = new List<string>(folders.Split(','));
 
-                //Go trough every folder and get all files
-                foreach(string folder in folderList)
-                {
-                    //Retrieve all files with the Extension .mp3
-                    var allFiles = Directory.GetFiles(folder).Where(file => Path.GetExtension(file) == ".mp3");
-
-                    //Add every item in the list of songs
-                    foreach (string file in allFiles)
-                        allSongs.Add(new SongInfoModel(Path.GetFileNameWithoutExtension(file), file));
-                }
+                //Retrieve all songs from the folders
+                allSongs = FileService.GetAllSongs(folderList);
 
                 //Return the full list when user is not searching
                 if (String.IsNullOrWhiteSpace(searchText))
@@ -101,19 +95,51 @@ namespace stijnify.Views
             listView.EndRefresh();
         }
 
+        /// <summary>
+        /// Event when character is entered in Search bar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             GetAllFiles(e.NewTextValue);
         }
 
+        #region Song Options
+
+        /// <summary>
+        /// Event when options for song are clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void SongOptions_Clicked(object sender, EventArgs e)
         {
             SongInfoModel songInfo = (SongInfoModel)((ImageButton)sender).CommandParameter;
             var response = await DisplayActionSheet("Song Options", "Cancel", null,"Delete file" ,"Play", "Add To Queue");
-            string searchText = null;
 
             if (response.ToLower() == "delete file")
-                await DeleteFile(songInfo.Path);
+            {
+                DeleteSong(songInfo.Path);
+            }
+
+
+        }
+
+        /// <summary>
+        /// All actions needed for deleting a song
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private async void DeleteSong(string path)
+        {
+            bool deletedStatus = false;
+            string searchText = null;
+            bool deleteResponse = await DisplayAlert("Delete song", "Are you sure you want to delete this song?", "Delete", "Cancel");
+            if (deleteResponse)
+                deletedStatus = FileService.DeleteFile(path);
+
+            if (!deletedStatus)
+                return;
 
             if (!String.IsNullOrEmpty(songSearchBar.Text))
                 searchText = songSearchBar.Text;
@@ -121,18 +147,13 @@ namespace stijnify.Views
             GetAllFiles(searchText);
         }
 
-        /// <summary>
-        /// Delete a song
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        private async Task<bool> DeleteFile(string path)
-        {
-            bool response = await DisplayAlert("Delete song", "Are you sure you want to delete this song?", "Delete", "Cancel");
-            if(response)
-                File.Delete(path);
+        #endregion
 
-            return true;
+        private void PlaySong_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var songInfo = (SongInfoModel)e.Item;
+
+            MediaPlayerService.SelectSong(songInfo.Path);
         }
     }
 }

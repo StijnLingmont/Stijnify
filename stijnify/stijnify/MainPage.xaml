@@ -9,8 +9,8 @@
              UnselectedTabColor="#BBBBBB"
              SelectedTabColor="#ffffff"
              NavigationPage.HasNavigationBar="false"
+             android:TabbedPage.IsSwipePagingEnabled="False"
             >
-
     <TabbedPage.Children>
         <NavigationPage Title="Home" Icon="home" BarBackgroundColor="#0E0F11">
             <x:Arguments>
