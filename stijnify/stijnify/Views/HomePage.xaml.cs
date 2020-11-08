@@ -67,12 +67,12 @@ namespace stijnify.Views
                 //Retrieve all songs from the folders
                 allSongs = FileService.GetAllSongs(folderList);
 
-                //Return the full list when user is not searching
+                //Check if send full list or just searched List
                 if (String.IsNullOrWhiteSpace(searchText))
                     ViewModel.SongList = allSongs;
+                else
+                    ViewModel.SongList = new ObservableCollection<SongInfoModel>(allSongs.Where(song => song.Name.ToLower().Contains(searchText.ToLower())));
 
-                //Retrieve the searched results
-                ViewModel.SongList = new ObservableCollection<SongInfoModel>(allSongs.Where(song => song.Name.ToLower().Contains(searchText.ToLower())));
 
             }
             catch (Exception ex)
@@ -152,8 +152,10 @@ namespace stijnify.Views
         private void PlaySong_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var songInfo = (SongInfoModel)e.Item;
+            var listItemSource = ((ListView)sender).ItemsSource;
+            var fullSongList = listItemSource.Cast<SongInfoModel>().ToList();
 
-            MediaPlayerService.SelectSong(songInfo.Path);
+            MediaPlayerService.SelectSong(songInfo, fullSongList);
         }
     }
 }

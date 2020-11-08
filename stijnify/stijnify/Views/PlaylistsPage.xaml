@@ -9,7 +9,7 @@
     
     <ContentPage.Content>
         <AbsoluteLayout BackgroundColor="#36393F">
-            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 0.77" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 0.72" AbsoluteLayout.LayoutFlags="All">
                 <ListView></ListView>
             </StackLayout>
 

@@ -1,39 +1,51 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:component="clr-namespace:stijnify.Views.Component"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="stijnify.Views.Component.MediaPlayer"
-             AbsoluteLayout.LayoutBounds="1, 1, 1, 0.23" 
+             AbsoluteLayout.LayoutBounds="1, 1, 1, 0.28" 
              AbsoluteLayout.LayoutFlags="All"
              >
   <ContentView.Content>
-        <Grid BackgroundColor="#262A33">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="20" />
-            </Grid.ColumnDefinitions>
-            
-            <ImageButton Source="previous"
+        <StackLayout BackgroundColor="#262A33" VerticalOptions="FillAndExpand">
+
+            <!-- Progress Song -->
+            <StackLayout Padding="0, 9">
+                <Slider x:Name="progresSlider" Maximum="{Binding MaxSecondsSong}" Minimum="-1" DragStarted="progresSlider_DragStarted" DragCompleted="SongProgress_DragCompleted" PropertyChanging="Slider_PropertyChanging" Value="{Binding ProgressSecondsSong}" />
+
+                <StackLayout Orientation="Horizontal" Margin="0" Padding="10, 0">
+                    <Label x:Name="currentProgressLabel" Text="{Binding ProgressLengthSong}" HorizontalOptions="StartAndExpand" TextColor ="White" />
+                    <Label x:Name="lengthSongLabel" Text="{Binding MaxLengthSong}" HorizontalOptions="EndAndExpand" TextColor="White" />
+                </StackLayout>
+            </StackLayout>
+
+            <!-- Player Controls -->
+            <Grid VerticalOptions="FillAndExpand" Padding="0, 0, 0, 15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+
+                <ImageButton Source="previous"
                         Grid.Column="1" Grid.Row="0"
-                        Padding="0, 20, 0, 20"
                         VerticalOptions="FillAndExpand"
                         BackgroundColor="Transparent"
             />
-            <ImageButton Source="{Binding PlayPause}}"
+                <ImageButton Source="{Binding PlayPause}"
                         Grid.Column="2" Grid.Row="0"
-                        Padding="0, 20, 0, 20"
                         VerticalOptions="FillAndExpand"
                         BackgroundColor="Transparent"
                         Clicked="PauseResume_Clicked"
             />
-            <ImageButton Source="next"
+                <ImageButton Source="next"
                         Grid.Column="3" Grid.Row="0"
-                        Padding="0, 20, 0, 20"
                         VerticalOptions="FillAndExpand"
                         BackgroundColor="Transparent"
             />
-        </Grid>
-  </ContentView.Content>
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
 </ContentView>

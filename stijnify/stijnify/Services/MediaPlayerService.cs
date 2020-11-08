@@ -1,9 +1,11 @@
 ﻿using MediaManager;
 using MediaManager.Playback;
+using ReactiveUI;
 using stijnify.Interfaces;
 using stijnify.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace stijnify.Services
@@ -15,9 +17,22 @@ namespace stijnify.Services
 
         }
 
-        public static async void SelectSong(string path)
+        /// <summary>
+        /// Force Select a song
+        /// </summary>
+        /// <param name="song"></param>
+        /// <param name="standardQueue"></param>
+        public static async void SelectSong(SongInfoModel song, List<SongInfoModel> standardQueue)
         {
-            await Constants.MediaPlayer.Play(path);
+            //Get the queue
+            MainPage mainPage = (MainPage)App.Current.MainPage;
+            var queue = mainPage._Queue;
+
+            queue._StandardQueue = standardQueue;
+
+            queue._SelectedSong = standardQueue.IndexOf(song);
+
+            await Constants.MediaPlayer.Play(song.Path);
         }
 
         public async void Play(string path)
@@ -25,19 +40,14 @@ namespace stijnify.Services
             await Constants.MediaPlayer.Play(path);
         }
 
-        public void Resume()
-        {
-
-        }
-
-        public void Pause()
-        {
-
-        }
-
         public async void PlayPauseToggle()
         {
             await Constants.MediaPlayer.PlayPause();
+        }
+
+        public static async void ChangePosition(TimeSpan position)
+        {
+            await Constants.MediaPlayer.SeekTo(position);
         }
     }
 }

@@ -12,7 +12,7 @@
 
     <ContentPage.Content>
         <AbsoluteLayout BackgroundColor="#36393F">
-            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 0.77" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 0.72" AbsoluteLayout.LayoutFlags="All">
                 <!-- Search Bar -->
                 <SearchBar Placeholder="Search..." 
                        PlaceholderColor="Black" 
@@ -50,7 +50,7 @@
             </StackLayout>
 
             <!-- MediaPlayer -->
-            <component:MediaPlayer />
+            <component:MediaPlayer x:Name="mediaPlayer" />
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

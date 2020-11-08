@@ -13,16 +13,6 @@ namespace stijnify.Interfaces
         void Play(string path);
 
         /// <summary>
-        /// Resume song
-        /// </summary>
-        void Resume();
-
-        /// <summary>
-        /// Pause song
-        /// </summary>
-        void Pause();
-
-        /// <summary>
         /// Toggle for the play and pause
         /// </summary>
         void PlayPauseToggle();
