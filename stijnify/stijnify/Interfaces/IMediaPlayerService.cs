@@ -23,6 +23,21 @@ namespace stijnify.Interfaces
         void PlayPauseToggle();
 
         /// <summary>
+        /// Go to next song
+        /// </summary>
+        void Next();
+
+        /// <summary>
+        /// Go to previous song
+        /// </summary>
+        void Previous();
+
+        /// <summary>
+        /// Check if queue has a previous song
+        /// </summary>
+        bool HasPrevious();
+
+        /// <summary>
         /// Check if queue has a next song
         /// </summary>
         bool HasNext();

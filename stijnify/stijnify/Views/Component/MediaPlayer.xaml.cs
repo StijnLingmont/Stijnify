@@ -147,6 +147,26 @@ namespace stijnify.Views.Component
             _canProgress = false;
         }
 
+        /// <summary>
+        /// Event when clicking previous button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Previous_Clicked(object sender, EventArgs e)
+        {
+            _mediaPlayerService.Previous();
+        }
+
+        /// <summary>
+        /// Event when clicking next button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Next_Clicked(object sender, EventArgs e)
+        {
+            _mediaPlayerService.Next();
+        }
+
         #endregion
     }
 }

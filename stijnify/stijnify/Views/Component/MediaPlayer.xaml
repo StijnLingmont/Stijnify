@@ -33,6 +33,7 @@
                         Grid.Column="1" Grid.Row="0"
                         VerticalOptions="FillAndExpand"
                         BackgroundColor="Transparent"
+                        Clicked="Previous_Clicked"
             />
                 <ImageButton Source="{Binding PlayPause}"
                         Grid.Column="2" Grid.Row="0"
@@ -44,6 +45,7 @@
                         Grid.Column="3" Grid.Row="0"
                         VerticalOptions="FillAndExpand"
                         BackgroundColor="Transparent"
+                        Clicked="Next_Clicked"
             />
             </Grid>
         </StackLayout>

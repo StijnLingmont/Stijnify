@@ -20,20 +20,14 @@ namespace stijnify.Services
 
         #region MediaPlayer Events
 
+        /// <summary>
+        /// Event for when song is Finished
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MediaPlayer_MediaItemFinished(object sender, MediaManager.Media.MediaItemEventArgs e)
         {
-            //Check if MediaPlayer has next item
-            if (!HasNext())
-            {
-                Stop();
-                return;
-            }
-
-            var queue = ((MainPage)Application.Current.MainPage)._Queue;
-            queue._SelectedSong++;
-            var song = queue._StandardQueue[queue._SelectedSong];
-
-            Play(queue._StandardQueue[queue._SelectedSong].Path);
+            Next();
         }
 
         #endregion
@@ -56,6 +50,8 @@ namespace stijnify.Services
             await Constants.MediaPlayer.Play(song.Path);
         }
 
+        #region Basic song actions
+
         public async void Play(string path)
         {
             await Constants.MediaPlayer.Play(path);
@@ -71,16 +67,55 @@ namespace stijnify.Services
             await Constants.MediaPlayer.Stop();
         }
 
+        public async void ChangePosition(TimeSpan position)
+        {
+            await Constants.MediaPlayer.SeekTo(position);
+        }
+
+        #endregion
+
+        public void Next()
+        {
+            //Check if MediaPlayer has next item
+            if (!HasNext())
+            {
+                Stop();
+                return;
+            }
+
+            var queue = ((MainPage)Application.Current.MainPage)._Queue;
+            queue._SelectedSong++;
+
+            Play(queue._StandardQueue[queue._SelectedSong].Path);
+        }
+
+        public void Previous()
+        {
+            //Check if MediaPlayer has next item
+            if (!HasPrevious())
+            {
+                Stop();
+                return;
+            }
+
+            var queue = ((MainPage)Application.Current.MainPage)._Queue;
+            queue._SelectedSong--;
+
+            Play(queue._StandardQueue[queue._SelectedSong].Path);
+        }
+
+        public bool HasPrevious()
+        {
+            var queue = ((MainPage)Application.Current.MainPage)._Queue;
+
+            return queue._SelectedSong > 0;
+        }
+
         public bool HasNext()
         {
             var queue = ((MainPage)Application.Current.MainPage)._Queue;
 
             return queue._StandardQueue.Count > queue._SelectedSong + 1;
-        }
-
-        public async void ChangePosition(TimeSpan position)
-        {
-            await Constants.MediaPlayer.SeekTo(position);
         }
     }
 }
