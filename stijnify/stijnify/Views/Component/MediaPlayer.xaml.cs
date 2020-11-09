@@ -1,6 +1,9 @@
-﻿using MediaManager;
+﻿using Autofac;
+using MediaManager;
 using MediaManager.Library;
 using MediaManager.Playback;
+using MediaManager.Player;
+using stijnify.Interfaces;
 using stijnify.Model;
 using stijnify.Services;
 using stijnify.ViewModels;
@@ -20,14 +23,14 @@ namespace stijnify.Views.Component
     public partial class MediaPlayer : ContentView
     {
         MediaPlayerModel ViewModel { get; set; }
-        MediaPlayerService _mediaPlayerService;
+        IMediaPlayerService _mediaPlayerService;
         bool _canProgress = true;
 
         public MediaPlayer()
         {
             InitializeComponent();
 
-            _mediaPlayerService = new MediaPlayerService();
+            _mediaPlayerService = Container.ContainerInstance.Resolve<IMediaPlayerService>();
 
             BindingContext = ViewModel = new MediaPlayerModel();
 
@@ -79,7 +82,7 @@ namespace stijnify.Views.Component
             var state = e.State;
             if (state == MediaManager.Player.MediaPlayerState.Playing)
                 ViewModel.PlayPause = "pause";
-            else if (state == MediaManager.Player.MediaPlayerState.Paused)
+            else if (state == MediaPlayerState.Paused || state == MediaPlayerState.Stopped)
                 ViewModel.PlayPause = "play";
         }
 
@@ -110,7 +113,7 @@ namespace stijnify.Views.Component
 
             TimeSpan newTimeSong = TimeSpan.FromSeconds(value);
 
-            MediaPlayerService.ChangePosition(newTimeSong);
+            _mediaPlayerService.ChangePosition(newTimeSong);
 
             _canProgress = true;
         }

@@ -13,6 +13,8 @@ namespace stijnify
     {
         public App()
         {
+            Container.Build();
+
             InitializeComponent();
 
             PermissionCheck();

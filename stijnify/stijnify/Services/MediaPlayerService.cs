@@ -7,15 +7,36 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Xamarin.Forms;
 
 namespace stijnify.Services
 {
-    class MediaPlayerService : IMediaPlayer
+    public class MediaPlayerService : IMediaPlayerService
     {
         public MediaPlayerService()
         {
-
+            Constants.MediaPlayer.MediaItemFinished += MediaPlayer_MediaItemFinished;
         }
+
+        #region MediaPlayer Events
+
+        private void MediaPlayer_MediaItemFinished(object sender, MediaManager.Media.MediaItemEventArgs e)
+        {
+            //Check if MediaPlayer has next item
+            if (!HasNext())
+            {
+                Stop();
+                return;
+            }
+
+            var queue = ((MainPage)Application.Current.MainPage)._Queue;
+            queue._SelectedSong++;
+            var song = queue._StandardQueue[queue._SelectedSong];
+
+            Play(queue._StandardQueue[queue._SelectedSong].Path);
+        }
+
+        #endregion
 
         /// <summary>
         /// Force Select a song
@@ -45,7 +66,19 @@ namespace stijnify.Services
             await Constants.MediaPlayer.PlayPause();
         }
 
-        public static async void ChangePosition(TimeSpan position)
+        public async void Stop()
+        {
+            await Constants.MediaPlayer.Stop();
+        }
+
+        public bool HasNext()
+        {
+            var queue = ((MainPage)Application.Current.MainPage)._Queue;
+
+            return queue._StandardQueue.Count > queue._SelectedSong + 1;
+        }
+
+        public async void ChangePosition(TimeSpan position)
         {
             await Constants.MediaPlayer.SeekTo(position);
         }

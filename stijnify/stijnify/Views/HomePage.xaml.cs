@@ -42,7 +42,15 @@ namespace stijnify.Views
 
             BindingContext = ViewModel = new HomePageModel();
 
+            Constants.MediaPlayer.StateChanged += MediaPlayer_StateChanged;
+
             GetAllFiles();
+        }
+
+        private void MediaPlayer_StateChanged(object sender, StateChangedEventArgs e)
+        {
+            var queue = ((MainPage)Application.Current.MainPage)._Queue;
+            songListView.SelectedItem = queue._StandardQueue[queue._SelectedSong];
         }
 
         /// <summary>

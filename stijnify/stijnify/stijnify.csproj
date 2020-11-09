@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.0.0" />
     <PackageReference Include="Plugin.MediaManager" Version="1.0.4" />
     <PackageReference Include="Plugin.MediaManager.Forms" Version="1.0.4" />
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
