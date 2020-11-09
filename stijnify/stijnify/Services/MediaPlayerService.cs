@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 using Xamarin.Forms;
 
 namespace stijnify.Services
@@ -41,11 +42,9 @@ namespace stijnify.Services
         {
             //Get the queue
             MainPage mainPage = (MainPage)App.Current.MainPage;
-            var queue = mainPage._Queue;
+            var queue = mainPage.QueueService;
 
-            queue._StandardQueue = standardQueue;
-
-            queue._SelectedSong = standardQueue.IndexOf(song);
+            queue.ForcePlayItem(song, standardQueue);
 
             await Constants.MediaPlayer.Play(song.Path);
         }
@@ -74,48 +73,32 @@ namespace stijnify.Services
 
         #endregion
 
+        #region Next/Previous
+
         public void Next()
         {
-            //Check if MediaPlayer has next item
-            if (!HasNext())
-            {
-                Stop();
-                return;
-            }
+            var queueService = ((MainPage)Application.Current.MainPage).QueueService;
 
-            var queue = ((MainPage)Application.Current.MainPage)._Queue;
-            queue._SelectedSong++;
+            var nextSong = queueService.NextQueueItem();
 
-            Play(queue._StandardQueue[queue._SelectedSong].Path);
+            if (nextSong == null)
+                Constants.MediaPlayer.Stop();
+            else
+                Play(nextSong.Path);
         }
 
         public void Previous()
         {
-            //Check if MediaPlayer has next item
-            if (!HasPrevious())
-            {
-                Stop();
-                return;
-            }
+            var queueService = ((MainPage)Application.Current.MainPage).QueueService;
 
-            var queue = ((MainPage)Application.Current.MainPage)._Queue;
-            queue._SelectedSong--;
+            var prevSong = queueService.PreviousQueueItem();
 
-            Play(queue._StandardQueue[queue._SelectedSong].Path);
+            if (prevSong == null)
+                Constants.MediaPlayer.Stop();
+            else
+                Play(prevSong.Path);
         }
 
-        public bool HasPrevious()
-        {
-            var queue = ((MainPage)Application.Current.MainPage)._Queue;
-
-            return queue._SelectedSong > 0;
-        }
-
-        public bool HasNext()
-        {
-            var queue = ((MainPage)Application.Current.MainPage)._Queue;
-
-            return queue._StandardQueue.Count > queue._SelectedSong + 1;
-        }
+        #endregion
     }
 }

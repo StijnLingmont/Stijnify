@@ -4,6 +4,7 @@ using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using stijnify.Interfaces;
 using stijnify.Model;
+using stijnify.Services;
 using stijnify.Views;
 using System;
 using System.Collections.Generic;
@@ -17,12 +18,13 @@ namespace stijnify
 {
     public partial class MainPage : TabbedPage
     {
-        public QueueInfo _Queue;
+        public QueueService QueueService;
 
         public MainPage()
         {
             InitializeComponent();
-            _Queue = new QueueInfo();
+
+            QueueService = new QueueService();
         }
     }
 }

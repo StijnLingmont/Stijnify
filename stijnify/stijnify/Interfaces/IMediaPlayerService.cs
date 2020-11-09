@@ -33,16 +33,6 @@ namespace stijnify.Interfaces
         void Previous();
 
         /// <summary>
-        /// Check if queue has a previous song
-        /// </summary>
-        bool HasPrevious();
-
-        /// <summary>
-        /// Check if queue has a next song
-        /// </summary>
-        bool HasNext();
-
-        /// <summary>
         /// Change position of song
         /// </summary>
         /// <param name="position"></param>

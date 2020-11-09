@@ -49,8 +49,8 @@ namespace stijnify.Views
 
         private void MediaPlayer_StateChanged(object sender, StateChangedEventArgs e)
         {
-            var queue = ((MainPage)Application.Current.MainPage)._Queue;
-            songListView.SelectedItem = queue._StandardQueue[queue._SelectedSong];
+            var queue = ((MainPage)Application.Current.MainPage).QueueService;
+            songListView.SelectedItem = queue.GetQueueItem();
         }
 
         /// <summary>
@@ -129,8 +129,10 @@ namespace stijnify.Views
             {
                 DeleteSong(songInfo.Path);
             }
-
-
+            else if (response.ToLower() == "add to queue")
+            {
+                AddToQueue(songInfo);
+            }
         }
 
         /// <summary>
@@ -155,6 +157,11 @@ namespace stijnify.Views
             GetAllFiles(searchText);
         }
 
+        private void AddToQueue(SongInfoModel song)
+        {
+            var queue = ((MainPage)Application.Current.MainPage).QueueService;
+            queue.StoreQueueItem(song);
+        }
         #endregion
 
         private void PlaySong_ItemTapped(object sender, ItemTappedEventArgs e)

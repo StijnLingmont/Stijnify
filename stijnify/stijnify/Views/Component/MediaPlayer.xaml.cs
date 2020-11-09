@@ -159,7 +159,7 @@ namespace stijnify.Views.Component
 
         /// <summary>
         /// Event when clicking next button
-        /// </summary>
+        /// </summary>s
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Next_Clicked(object sender, EventArgs e)
