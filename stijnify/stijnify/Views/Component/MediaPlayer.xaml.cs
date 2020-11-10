@@ -43,9 +43,23 @@ namespace stijnify.Views.Component
             Constants.MediaPlayer.StateChanged += StateChanged;
             Constants.MediaPlayer.PositionChanged += CurrentSong_PositionChanged;
             Constants.MediaPlayer.MediaItemFinished += MediaPlayer_MediaItemFinished;
+            Constants.MediaPlayer.BufferedChanged += MediaPlayer_BufferedChanged;
+        }
+
+        private void MediaPlayer_BufferedChanged(object sender, BufferedChangedEventArgs e)
+        {
+            Console.WriteLine(e.Buffered);
         }
 
         private void MediaPlayer_MediaItemFinished(object sender, MediaManager.Media.MediaItemEventArgs e)
+        {
+            ResetBaseProgress();
+        }
+
+        /// <summary>
+        /// Event for Reseting base progress
+        /// </summary>
+        void ResetBaseProgress()
         {
             ViewModel.ProgressLengthSong = "00:00";
             ViewModel.ProgressSecondsSong = 0;
@@ -69,7 +83,6 @@ namespace stijnify.Views.Component
             //Max song progress
             ViewModel.MaxLengthSong = $"{maxMinutes}:{maxSeconds}";
             ViewModel.MaxSecondsSong = maxTotalSeconds;
-
 
             //Update progress if possible
             if (_canProgress)
@@ -162,6 +175,7 @@ namespace stijnify.Views.Component
         /// <param name="e"></param>
         private void Previous_Clicked(object sender, EventArgs e)
         {
+            ResetBaseProgress();
             _mediaPlayerService.Previous();
         }
 
@@ -172,6 +186,7 @@ namespace stijnify.Views.Component
         /// <param name="e"></param>
         private void Next_Clicked(object sender, EventArgs e)
         {
+            ResetBaseProgress();
             _mediaPlayerService.Next();
         }
 
