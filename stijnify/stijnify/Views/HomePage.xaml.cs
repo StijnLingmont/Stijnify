@@ -25,11 +25,6 @@ namespace stijnify.Views
     {
         #region Initialise Variables
 
-        /// <summary>
-        /// Root Folder of the device
-        /// </summary>
-        string _RootFolder;
-
         HomePageModel ViewModel;
 
         #endregion
@@ -37,8 +32,6 @@ namespace stijnify.Views
         public HomePage()
         {
             InitializeComponent();
-
-            _RootFolder = FileService.GetRootDirectory().Result;
 
             BindingContext = ViewModel = new HomePageModel();
 

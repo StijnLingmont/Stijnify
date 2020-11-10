@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,20 +22,42 @@ namespace stijnify.Droid
 {
     class DependecyService : IExternalStorage
     {
-        public string GetExternalStorage()
+        /// <summary>
+        /// Get base paths.
+        /// </summary>
+        /// <returns>List of base paths, phone storage and sd card storage paths.</returns>
+        public List<string> GetBasePaths()
         {
+            // Base paths
+            var basePaths = new List<string>();
+
             try
             {
-                string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-                string context = (string)Android.OS.Environment.ExternalStorageDirectory;
+                // Add internal phone storage
+                basePaths.Add((string)Android.OS.Environment.ExternalStorageDirectory);
 
-                return context;
+                // Storage manager
+                var storageManager = (Android.OS.Storage.StorageManager)Android.App.Application.Context.GetSystemService(Context.StorageService);
+
+                // All storage volumes
+                var storageVolumes = (Java.Lang.Object[])storageManager.Class.GetDeclaredMethod("getVolumeList").Invoke(storageManager);
+
+                // Add all sd cards
+                foreach (var storage in storageVolumes)
+                {
+                    var info = (Java.IO.File)storage.Class.GetDeclaredMethod("getPathFile").Invoke(storage);
+
+                    if ((bool)storage.Class.GetDeclaredMethod("isEmulated").Invoke(storage) == false && info.TotalSpace > 0)
+                        basePaths.Add(info.Path);
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return null;
+                Console.WriteLine($"GetBasePaths Got exception while trying to get base paths! Current list: {basePaths}. {ex}");
             }
+
+            // Return base paths
+            return basePaths;
         }
     }
 }

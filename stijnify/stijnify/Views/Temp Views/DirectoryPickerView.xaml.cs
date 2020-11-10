@@ -29,11 +29,15 @@ namespace stijnify.Views.Temp_Views
         {
             InitializeComponent();
 
-            //Set root folder as selected folder
-            _SelectedFolder = DependencyService.Get<IExternalStorage>().GetExternalStorage();
-            
-            if(_SelectedFolder == null)
-                Thread.CurrentThread.Abort();
+            var allFolders = DependencyService.Get<IExternalStorage>().GetBasePaths();
+            ObservableCollection<string> allDirectories = new ObservableCollection<string>();
+
+            foreach (string folder in allFolders)
+            {
+                allDirectories.Add(folder);
+            }
+
+            directoriesList.ItemsSource = allDirectories;
 
             GetFolderStructure();
         }

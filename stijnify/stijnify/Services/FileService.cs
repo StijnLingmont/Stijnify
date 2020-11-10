@@ -17,15 +17,6 @@ namespace stijnify.Services
     public class FileService
     {
         /// <summary>
-        /// Get the Root Directory of the Device
-        /// </summary>
-        /// <returns>Root Directory of the device</returns>
-        public static async Task<string> GetRootDirectory()
-        {
-            return DependencyService.Get<IExternalStorage>().GetExternalStorage();
-        }
-
-        /// <summary>
         /// Retrieve all songs in the list of folders
         /// </summary>
         /// <param name="folderList"></param>
