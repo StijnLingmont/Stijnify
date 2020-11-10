@@ -41,6 +41,13 @@ namespace stijnify.Views.Component
         {
             Constants.MediaPlayer.StateChanged += StateChanged;
             Constants.MediaPlayer.PositionChanged += CurrentSong_PositionChanged;
+            Constants.MediaPlayer.MediaItemFinished += MediaPlayer_MediaItemFinished;
+        }
+
+        private void MediaPlayer_MediaItemFinished(object sender, MediaManager.Media.MediaItemEventArgs e)
+        {
+            ViewModel.ProgressLengthSong = "00:00";
+            ViewModel.ProgressSecondsSong = 0;
         }
 
         #region MediaPlayer Events
