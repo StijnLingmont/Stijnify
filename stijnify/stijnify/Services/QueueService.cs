@@ -19,7 +19,7 @@ namespace stijnify.Services
         public SongInfoModel GetQueueItem()
         {
             int queueItemIndex;
-            bool getCustomItem = _queue._CustomQueue.Count > 0;
+            bool getCustomItem = _queue._CustomQueue.Count > 0 && _queue._CustomSelectedSong >= 0;
 
             //Check if there is added custom queue items
             if (getCustomItem)
@@ -96,7 +96,7 @@ namespace stijnify.Services
 
         public void ForcePlayItem(SongInfoModel song, List<SongInfoModel> queue)
         {
-            if(_queue._CustomQueue.Count > 0)
+            if(_queue._CustomSelectedSong >= 0)
             {
                 _queue._CustomQueue[_queue._CustomSelectedSong] = song;
             } 
