@@ -7,6 +7,7 @@ using stijnify.Interfaces;
 using stijnify.Model;
 using stijnify.Services;
 using stijnify.ViewModels;
+using stijnify.Views.Temp_Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -172,6 +173,16 @@ namespace stijnify.Views.Component
         private void Next_Clicked(object sender, EventArgs e)
         {
             _mediaPlayerService.Next();
+        }
+
+        /// <summary>
+        /// Event when click queue
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Queue_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new QueueView());
         }
 
         #endregion

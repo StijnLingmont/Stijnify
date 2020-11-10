@@ -12589,13 +12589,16 @@ namespace stijnify.Droid
 			public const int previous = 2131165359;
 			
 			// aapt resource value: 0x7F0700B0
-			public const int settings = 2131165360;
+			public const int queue = 2131165360;
 			
 			// aapt resource value: 0x7F0700B1
-			public const int tooltip_frame_dark = 2131165361;
+			public const int settings = 2131165361;
 			
 			// aapt resource value: 0x7F0700B2
-			public const int tooltip_frame_light = 2131165362;
+			public const int tooltip_frame_dark = 2131165362;
+			
+			// aapt resource value: 0x7F0700B3
+			public const int tooltip_frame_light = 2131165363;
 			
 			static Drawable()
 			{

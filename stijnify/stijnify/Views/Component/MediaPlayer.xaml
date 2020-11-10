@@ -7,47 +7,58 @@
              AbsoluteLayout.LayoutFlags="All"
              >
   <ContentView.Content>
-        <StackLayout BackgroundColor="#262A33" VerticalOptions="FillAndExpand">
+        <AbsoluteLayout BackgroundColor="#262A33" VerticalOptions="FillAndExpand">
 
-            <!-- Progress Song -->
-            <StackLayout Padding="0, 9">
-                <Slider x:Name="progresSlider" Maximum="{Binding MaxSecondsSong}" Minimum="-1" DragStarted="progresSlider_DragStarted" DragCompleted="SongProgress_DragCompleted" PropertyChanging="Slider_PropertyChanging" Value="{Binding ProgressSecondsSong}" />
+            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <!-- Progress Song -->
+                <StackLayout Padding="0, 9">
+                    <Slider x:Name="progresSlider" Maximum="{Binding MaxSecondsSong}" Minimum="-1" DragStarted="progresSlider_DragStarted" DragCompleted="SongProgress_DragCompleted" PropertyChanging="Slider_PropertyChanging" Value="{Binding ProgressSecondsSong}" />
 
-                <StackLayout Orientation="Horizontal" Margin="0" Padding="10, 0">
-                    <Label x:Name="currentProgressLabel" Text="{Binding ProgressLengthSong}" HorizontalOptions="StartAndExpand" TextColor ="White" />
-                    <Label x:Name="lengthSongLabel" Text="{Binding MaxLengthSong}" HorizontalOptions="EndAndExpand" TextColor="White" />
+                    <StackLayout Orientation="Horizontal" Margin="0" Padding="10, 0">
+                        <Label x:Name="currentProgressLabel" Text="{Binding ProgressLengthSong}" HorizontalOptions="StartAndExpand" TextColor ="White" />
+                        <Label x:Name="lengthSongLabel" Text="{Binding MaxLengthSong}" HorizontalOptions="EndAndExpand" TextColor="White" />
+                    </StackLayout>
                 </StackLayout>
-            </StackLayout>
 
-            <!-- Player Controls -->
-            <Grid VerticalOptions="FillAndExpand" Padding="0, 0, 0, 15">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="20" />
-                </Grid.ColumnDefinitions>
+                <!-- Player Controls -->
+                <Grid VerticalOptions="FillAndExpand" Padding="0, 0, 0, 15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                    </Grid.ColumnDefinitions>
 
-                <ImageButton Source="previous"
+                    <ImageButton Source="previous"
                         Grid.Column="1" Grid.Row="0"
                         VerticalOptions="FillAndExpand"
                         BackgroundColor="Transparent"
                         Clicked="Previous_Clicked"
                 />
-                <ImageButton Source="{Binding PlayPause}"
+                    <ImageButton Source="{Binding PlayPause}"
                         Grid.Column="2" Grid.Row="0"
                         VerticalOptions="FillAndExpand"
                         BackgroundColor="Transparent"
                         Clicked="PauseResume_Clicked"
                 />
-                <ImageButton Source="next"
+                    <ImageButton Source="next"
                         Grid.Column="3" Grid.Row="0"
                         VerticalOptions="FillAndExpand"
                         BackgroundColor="Transparent"
                         Clicked="Next_Clicked"
                 />
-            </Grid>
-        </StackLayout>
+                </Grid>
+            </StackLayout>
+
+            <ImageButton Source="queue"
+                        Grid.Column="4" Grid.Row="1"
+                        VerticalOptions="FillAndExpand"
+                        BackgroundColor="Transparent"
+                        Clicked="Queue_Clicked"
+                        AbsoluteLayout.LayoutBounds="0.98, 0.95, 40, 40"
+                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                />
+        </AbsoluteLayout>
     </ContentView.Content>
 </ContentView>

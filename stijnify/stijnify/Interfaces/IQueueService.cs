@@ -18,5 +18,7 @@ namespace stijnify.Interfaces
         bool HasPrevious();
 
         void ForcePlayItem(SongInfoModel song, List<SongInfoModel> queue);
+
+        void RemoveCustomQueueItem(SongInfoModel removeIndex);
     }
 }

@@ -35,9 +35,9 @@ namespace stijnify.Services
 
         }
 
-        public void RemoveCustomQueueItem(int removeIndex)
+        public void RemoveCustomQueueItem(SongInfoModel song)
         {
-            _queue._CustomQueue.RemoveAt(removeIndex);
+            _queue._CustomQueue.Remove(song);
         }
 
         public SongInfoModel NextQueueItem()
