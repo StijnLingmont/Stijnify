@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,12 @@ namespace stijnify.Model
 {
     public class SongInfoModel
     {
+        /// <summary>
+        /// The Id of the song
+        /// </summary>
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
         /// <summary>
         /// Name of the song
         /// </summary>
@@ -16,10 +23,13 @@ namespace stijnify.Model
         /// </summary>
         public string Path { get; set; }
 
-        public SongInfoModel(string c_name, string c_path)
+        /// <summary>
+        /// The Id of the playlist it is combined too
+        /// </summary>
+        public int PlayListId { get; set; }
+
+        public SongInfoModel()
         {
-            Name = c_name;
-            Path = c_path;
         }
     }
 }

@@ -20,7 +20,7 @@
 
         <NavigationPage Title="Playlists" Icon="playlist" BarBackgroundColor="#0E0F11">
             <x:Arguments>
-                <views:PlaylistsPage />
+                <views:PlaylistIndexPage />
             </x:Arguments>
         </NavigationPage>
 

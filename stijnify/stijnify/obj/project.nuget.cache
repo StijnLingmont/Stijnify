@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wsCaoEKBB+Gj5CCZGt95uKRL8Kfexv6/bwhN7VY+4Qp6zjwvOsQ3VZoXPUnSltqqkuul6fqMV02L+AcMj53ptw==",
+  "dgSpecHash": "QaXBGOLqNFwRAqWDLylQX1ttRRKx+mMzB2n3Dpa+mDTPFzWsHC5deu3u/aPOx+RM/prutmcsI4O8KwLSXPgAMw==",
   "success": true,
   "projectFilePath": "D:\\Stijn\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\stijnify.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,11 @@
     "C:\\Users\\Werk\\.nuget\\packages\\plugin.permissions\\6.0.1\\plugin.permissions.6.0.1.nupkg.sha512",
     "C:\\Users\\Werk\\.nuget\\packages\\reactiveui\\12.1.5\\reactiveui.12.1.5.nupkg.sha512",
     "C:\\Users\\Werk\\.nuget\\packages\\splat\\9.6.1\\splat.9.6.1.nupkg.sha512",
+    "C:\\Users\\Werk\\.nuget\\packages\\sqlite-net-pcl\\1.7.335\\sqlite-net-pcl.1.7.335.nupkg.sha512",
+    "C:\\Users\\Werk\\.nuget\\packages\\sqlitepclraw.bundle_green\\2.0.3\\sqlitepclraw.bundle_green.2.0.3.nupkg.sha512",
+    "C:\\Users\\Werk\\.nuget\\packages\\sqlitepclraw.core\\2.0.3\\sqlitepclraw.core.2.0.3.nupkg.sha512",
+    "C:\\Users\\Werk\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.3\\sqlitepclraw.lib.e_sqlite3.2.0.3.nupkg.sha512",
+    "C:\\Users\\Werk\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.0.3\\sqlitepclraw.provider.e_sqlite3.2.0.3.nupkg.sha512",
     "C:\\Users\\Werk\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\Werk\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\Werk\\.nuget\\packages\\system.componentmodel\\4.3.0\\system.componentmodel.4.3.0.nupkg.sha512",

@@ -2,6 +2,8 @@
 using Plugin.FilePicker;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using SQLite;
+using stijnify.Data;
 using stijnify.Interfaces;
 using stijnify.Model;
 using stijnify.Services;

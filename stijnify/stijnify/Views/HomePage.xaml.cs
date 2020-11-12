@@ -17,6 +17,8 @@ using stijnify.Services;
 using stijnify.ViewModels;
 using stijnify.Model;
 using MediaManager.Playback;
+using stijnify.Data;
+using DynamicData;
 
 namespace stijnify.Views
 {
@@ -116,7 +118,7 @@ namespace stijnify.Views
         private async void SongOptions_Clicked(object sender, EventArgs e)
         {
             SongInfoModel songInfo = (SongInfoModel)((ImageButton)sender).CommandParameter;
-            var response = await DisplayActionSheet("Song Options", "Cancel", null,"Delete file" ,"Play", "Add To Queue");
+            var response = await DisplayActionSheet("Song Options", "Cancel", null,"Delete file" ,"Add To PlayList", "Add To Queue");
 
             if (response.ToLower() == "delete file")
             {
@@ -126,6 +128,31 @@ namespace stijnify.Views
             {
                 AddToQueue(songInfo);
             }
+            else if (response.ToLower() == "add to playlist")
+            {
+                StoreSongToPlayList(songInfo);
+            }
+        }
+
+        private async void StoreSongToPlayList(SongInfoModel song)
+        {
+            var playlists = new PlayListRepository().GetPlayLists();
+            List<string> playListChooseList = new List<string>();
+
+            foreach(var playlist in playlists)
+            {
+                playListChooseList.Add(playlist.Title);
+            }
+
+            var result = await DisplayActionSheet("Choose Playlist", "cancel", null, playListChooseList.ToArray());
+
+            if (result == "cancel") return;
+
+            var chosenPlaylist = playlists.Where(playlist => playlist.Title == result).FirstOrDefault();
+
+            var database = new SongRepository();
+            song.PlayListId = chosenPlaylist.Id;
+            database.AddSongToPlayList(song);
         }
 
         /// <summary>

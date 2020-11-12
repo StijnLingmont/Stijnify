@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:component="clr-namespace:stijnify.Views.Component"
+             x:Class="stijnify.Views.PlayListShowPage"
+             NavigationPage.HasBackButton="False"
+             >
+
+    <!-- Title of PlayList -->
+    <NavigationPage.TitleView BackgroundColor="#0E0F11">
+        <Grid Padding="5, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="30" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="" Grid.Column="1" Grid.Row="0" x:Name="selectedPlayListTitle" HorizontalOptions="Center" FontSize="25" TextColor="White" />
+            <ImageButton Source="back"
+                Grid.Column="0" Grid.Row="0"
+                VerticalOptions="CenterAndExpand" 
+                BackgroundColor="Transparent"
+                Clicked="BackButton_Clicked"
+            />
+        </Grid>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <AbsoluteLayout BackgroundColor="#36393F">
+            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 0.72" AbsoluteLayout.LayoutFlags="All">
+
+                <!-- PlayList List -->
+                <ListView x:Name="playlistSongList" ItemTapped="playlistSongList_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid x:Name="playlistSong" Padding="10, 0, 10, 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="0" TextColor="White" VerticalOptions="Center"></Label>
+                                    <ImageButton Source="options"
+                                    Grid.Column="1" Grid.Row="0"
+                                    VerticalOptions="CenterAndExpand" 
+                                    BackgroundColor="Transparent"
+                                    CommandParameter="{Binding Source={x:Reference playlistSong}, Path=BindingContext}"
+                                />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <!-- MediaPlayer -->
+            <component:MediaPlayer />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

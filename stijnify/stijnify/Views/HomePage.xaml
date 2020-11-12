@@ -6,9 +6,6 @@
              Title="Home"
              NavigationPage.HasNavigationBar="True"
              >
-    <NavigationPage.TitleView BackgroundColor="#0E0F11">
-        <Label Text="Home" HorizontalOptions="Center" FontSize="25" TextColor="White" />
-    </NavigationPage.TitleView>
 
     <ContentPage.Content>
         <AbsoluteLayout BackgroundColor="#36393F">

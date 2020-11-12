@@ -33,7 +33,11 @@ namespace stijnify.Services
 
                 //Add every item in the list of songs
                 foreach (string file in allFiles)
-                    allSongs.Add(new SongInfoModel(Path.GetFileNameWithoutExtension(file), file));
+                    allSongs.Add(new SongInfoModel()
+                    {
+                        Name = Path.GetFileNameWithoutExtension(file),
+                        Path = file
+                    });
             }
 
             return allSongs;
