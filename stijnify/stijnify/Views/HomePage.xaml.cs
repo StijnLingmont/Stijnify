@@ -45,7 +45,9 @@ namespace stijnify.Views
         private void MediaPlayer_StateChanged(object sender, StateChangedEventArgs e)
         {
             var queue = ((MainPage)Application.Current.MainPage).QueueService;
-            songListView.SelectedItem = queue.GetQueueItem();
+            var songItem = queue.GetQueueItem();
+            var foundSongItem = ViewModel.SongList.Where(e => e.Name == songItem.Name).FirstOrDefault();
+            songListView.SelectedItem = foundSongItem;
         }
 
         /// <summary>
