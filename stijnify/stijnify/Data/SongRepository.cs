@@ -33,7 +33,7 @@ namespace stijnify.Data
 
         public void RemoveSongFromPlayList(SongInfoModel playlist)
         {
-            throw new NotImplementedException();
+            _connection.Delete(playlist);
         }
     }
 }

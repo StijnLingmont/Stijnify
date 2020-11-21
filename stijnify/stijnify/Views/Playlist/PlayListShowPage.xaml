@@ -46,6 +46,7 @@
                                     VerticalOptions="CenterAndExpand" 
                                     BackgroundColor="Transparent"
                                     CommandParameter="{Binding Source={x:Reference playlistSong}, Path=BindingContext}"
+                                    Clicked="PlaylistItemOption_Clicked"
                                 />
                                 </Grid>
                             </ViewCell>
