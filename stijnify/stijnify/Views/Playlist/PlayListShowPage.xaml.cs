@@ -17,8 +17,13 @@ namespace stijnify.Views
 
     public partial class PlayListShowPage : ContentPage
     {
+        #region Variable Ínit
+
         SongRepository database { get; set; }
         private PlayListModel playlist { get; set; }
+
+        #endregion
+
         public PlayListShowPage(PlayListModel c_playlist)
         {
             InitializeComponent();
@@ -31,6 +36,9 @@ namespace stijnify.Views
             GetSongsFromPlayList();
         }
 
+        /// <summary>
+        /// Retrieve songs from playlist
+        /// </summary>
         private void GetSongsFromPlayList()
         {
             ObservableCollection<SongInfoModel> songs = new ObservableCollection<SongInfoModel>(database.GetSongsOfPlayList(playlist));
@@ -38,11 +46,21 @@ namespace stijnify.Views
             playlistSongList.ItemsSource = songs;
         }
 
+        /// <summary>
+        /// Event for back button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PopAsync();
         }
 
+        /// <summary>
+        /// Event for item tapped
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void playlistSongList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var songInfo = (SongInfoModel)e.Item;
@@ -52,6 +70,11 @@ namespace stijnify.Views
             MediaPlayerService.SelectSong(songInfo, fullSongList);
         }
 
+        /// <summary>
+        /// Event for options of a song
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void PlaylistItemOption_Clicked(object sender, EventArgs e)
         {
             SongInfoModel songInfo = (SongInfoModel)((ImageButton)sender).CommandParameter;
