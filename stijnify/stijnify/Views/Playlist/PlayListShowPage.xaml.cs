@@ -55,7 +55,7 @@ namespace stijnify.Views
         private async void PlaylistItemOption_Clicked(object sender, EventArgs e)
         {
             SongInfoModel songInfo = (SongInfoModel)((ImageButton)sender).CommandParameter;
-            var response = await DisplayActionSheet("Song Options", "Cancel", null, "Delete file", "Add To PlayList", "Add To Queue");
+            var response = await DisplayActionSheet("Song Options", "Cancel", null, "Delete file", "Add To Queue");
 
             if (response.ToLower() == "delete file")
             {
