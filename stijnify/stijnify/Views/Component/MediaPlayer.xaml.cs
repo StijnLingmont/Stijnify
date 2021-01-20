@@ -26,7 +26,7 @@ namespace stijnify.Views.Component
     {
         MediaPlayerModel ViewModel { get; set; }
         IMediaPlayerService _mediaPlayerService;
-        bool _progressBarIsDragging = true;
+        bool _progressBarIsDragging = false;
         Timer _progressTimer = null;
 
         public MediaPlayer()
@@ -102,8 +102,8 @@ namespace stijnify.Views.Component
             ViewModel.MaxLengthSong = $"{maxMinutes}:{maxSeconds}";
             ViewModel.MaxSecondsSong = maxTotalSeconds;
 
-            //Update progress if possible
-            if (_progressBarIsDragging)
+            //Update progress if progress bar is not dragging
+            if (!_progressBarIsDragging)
                 {
                     int totalSeconds = (int)position.TotalSeconds;
                     ViewModel.ProgressSecondsSong = totalSeconds;
@@ -173,7 +173,7 @@ namespace stijnify.Views.Component
 
             _mediaPlayerService.ChangePosition(newTimeSong);
 
-            _progressBarIsDragging = true;
+            _progressBarIsDragging = false;
         }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace stijnify.Views.Component
             if (ViewModel == null)
                 return;
 
-            if(!_progressBarIsDragging)
+            if(_progressBarIsDragging)
             {
                 var slider = (Slider)sender;
 
@@ -205,7 +205,7 @@ namespace stijnify.Views.Component
         /// <param name="e"></param>
         private void progresSlider_DragStarted(object sender, EventArgs e)
         {
-            _progressBarIsDragging = false;
+            _progressBarIsDragging = true;
         }
 
         /// <summary>
