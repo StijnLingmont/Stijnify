@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Android;
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -26,6 +27,7 @@ namespace stijnify.Droid
         /// Get base paths.
         /// </summary>
         /// <returns>List of base paths, phone storage and sd card storage paths.</returns>
+        [Obsolete]
         public List<string> GetBasePaths()
         {
             // Base paths
