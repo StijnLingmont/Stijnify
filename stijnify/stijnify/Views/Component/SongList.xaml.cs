@@ -22,6 +22,7 @@ namespace stijnify.Views.Component
         SongListModel ViewModel;
         Func<string, ObservableCollection<SongInfoModel>> _songListRetrieveMethod;
         SongListType _songListType;
+        SongRepository _database { get; set; }
 
         #region Initialisation
         public SongList()
@@ -29,6 +30,7 @@ namespace stijnify.Views.Component
             InitializeComponent();
 
             ViewModel = new SongListModel();
+            _database = new SongRepository();
 
             Constants.MediaPlayer.StateChanged += MediaPlayer_StateChanged;
         }
@@ -102,15 +104,12 @@ namespace stijnify.Views.Component
 
             List<string> options = new List<string>() {
                 "Delete file", 
-                "Add To Queue"
+                "Add To Queue",
+                "Add to Playlist"
             };
 
             //Check which page the list is in and add aditional items
-            if (_songListType == SongListType.AllSongs)
-            {
-                options.Add("Add to PlayList");
-            } 
-            else if(_songListType == SongListType.Playlist)
+            if(_songListType == SongListType.Playlist)
             {
                 options.Add("Delete from PlayList");
             }
@@ -133,6 +132,10 @@ namespace stijnify.Views.Component
             else if (optionSelected.ToLower() == "add to playlist")
             {
                 StoreSongToPlayList(song);
+            }
+            else if (optionSelected.ToLower() == "delete from playlist")
+            {
+                DeleteFromPlaylist(song);
             }
         }
 
@@ -187,6 +190,21 @@ namespace stijnify.Views.Component
         {
             var queue = ((MainPage)Application.Current.MainPage).QueueService;
             queue.StoreQueueItem(song);
+        }
+
+        /// <summary>
+        /// All actions needed for deleting a song
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private async void DeleteFromPlaylist(SongInfoModel song)
+        {
+            bool deleteResponse = await App.Current.MainPage.DisplayAlert("Delete song from playlist", "Are you sure you want to delete this song from your playlist?", "Delete", "Cancel");
+
+            if (deleteResponse)
+                _database.RemoveSongFromPlayList(song);
+
+            LoadSongs();
         }
 
         #endregion
