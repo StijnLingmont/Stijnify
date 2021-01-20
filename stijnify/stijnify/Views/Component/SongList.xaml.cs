@@ -1,5 +1,6 @@
 ﻿using MediaManager.Playback;
 using stijnify.Data;
+using stijnify.Enum;
 using stijnify.Model;
 using stijnify.Services;
 using stijnify.ViewModels;
@@ -19,24 +20,45 @@ namespace stijnify.Views.Component
     public partial class SongList : ContentView
     {
         SongListModel ViewModel;
+        Func<string, ObservableCollection<SongInfoModel>> _songListRetrieveMethod;
+        SongListType _songListType;
 
+        #region Initialisation
         public SongList()
         {
             InitializeComponent();
 
             ViewModel = new SongListModel();
 
-
             Constants.MediaPlayer.StateChanged += MediaPlayer_StateChanged;
         }
 
-        public void SetSongs(ObservableCollection<SongInfoModel> songList)
+        /// <summary>
+        /// Init the songlist
+        /// </summary>
+        /// <param name="songListRetrieveMethod"></param>
+        /// <param name="songListType"></param>
+        public void InitSongList(Func<string, ObservableCollection<SongInfoModel>> songListRetrieveMethod, SongListType songListType)
         {
-            Console.WriteLine(BindingContext);
+            _songListRetrieveMethod = songListRetrieveMethod;
+
+            _songListType = songListType;
+
+            LoadSongs();
+        }
+
+        /// <summary>
+        /// Load the songs in the ListView
+        /// </summary>
+        private void LoadSongs()
+        {
+            var songList = _songListRetrieveMethod(null);
             ViewModel.SongList = songList;
             songListView.ItemsSource = ViewModel.SongList;
         }
+        #endregion
 
+        #region Events
         private void songListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var songInfo = (SongInfoModel)e.Item;
@@ -55,6 +77,18 @@ namespace stijnify.Views.Component
             songListView.SelectedItem = foundSongItem;
         }
 
+        /// <summary>
+        /// Renew song list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void songListView_Refreshing(object sender, EventArgs e)
+        {
+            LoadSongs();
+            songListView.EndRefresh();
+        }
+        #endregion
+
         #region Song Options
 
         /// <summary>
@@ -64,29 +98,54 @@ namespace stijnify.Views.Component
         /// <param name="e"></param>
         private async void SongOptions_Clicked(object sender, EventArgs e)
         {
-            SongInfoModel songInfo = (SongInfoModel)((ImageButton)sender).CommandParameter;
-            var response = await App.Current.MainPage.DisplayActionSheet("Song Options", "Cancel", null,"Delete file" ,"Add To PlayList", "Add To Queue");
+            SongInfoModel song = (SongInfoModel)((ImageButton)sender).CommandParameter; //Retrieve the chosen song
 
-            if (response.ToLower() == "delete file")
+            List<string> options = new List<string>() {
+                "Delete file", 
+                "Add To Queue"
+            };
+
+            //Check which page the list is in and add aditional items
+            if (_songListType == SongListType.AllSongs)
             {
-                DeleteSong(songInfo.Path);
+                options.Add("Add to PlayList");
+            } 
+            else if(_songListType == SongListType.Playlist)
+            {
+                options.Add("Delete from PlayList");
             }
-            else if (response.ToLower() == "add to queue")
+
+            var response = await App.Current.MainPage.DisplayActionSheet("Song Options", "Cancel", null, options.ToArray());
+
+            RunSelectedOption(response, song);
+        }
+
+        private void RunSelectedOption(string optionSelected, SongInfoModel song)
+        {
+            if (optionSelected.ToLower() == "delete file")
             {
-                AddToQueue(songInfo);
+                DeleteSong(song.Path);
             }
-            else if (response.ToLower() == "add to playlist")
+            else if (optionSelected.ToLower() == "add to queue")
             {
-                StoreSongToPlayList(songInfo);
+                AddToQueue(song);
+            }
+            else if (optionSelected.ToLower() == "add to playlist")
+            {
+                StoreSongToPlayList(song);
             }
         }
+
+        #endregion
+
+        #region SongOptionActions
 
         private async void StoreSongToPlayList(SongInfoModel song)
         {
             var playlists = new PlayListRepository().GetPlayLists();
             List<string> playListChooseList = new List<string>();
 
-            foreach(var playlist in playlists)
+            foreach (var playlist in playlists)
             {
                 playListChooseList.Add(playlist.Title);
             }
@@ -129,6 +188,7 @@ namespace stijnify.Views.Component
             var queue = ((MainPage)Application.Current.MainPage).QueueService;
             queue.StoreQueueItem(song);
         }
+
         #endregion
     }
 }

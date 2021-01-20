@@ -20,6 +20,7 @@ using MediaManager.Playback;
 using stijnify.Data;
 using DynamicData;
 using stijnify.Views.Component;
+using stijnify.Enum;
 
 namespace stijnify.Views
 {
@@ -38,13 +39,13 @@ namespace stijnify.Views
 
             BindingContext = ViewModel = new HomePageModel();
 
-            GetAllFiles();
+            songListView.InitSongList(GetAllFiles, SongListType.AllSongs);
         }
 
         /// <summary>
         /// Get All Files from the folders chosen in the Settings
         /// </summary>
-        void GetAllFiles(string searchText = null)
+        ObservableCollection<SongInfoModel> GetAllFiles(string searchText = null)
         {
             try
             {
@@ -55,7 +56,7 @@ namespace stijnify.Views
                 var folders = Preferences.Get("folders", null);
 
                 if (folders == null)
-                    return;
+                    return null;
 
                 //Convert string in List of strings
                 folderList = new List<string>(folders.Split(','));
@@ -63,19 +64,16 @@ namespace stijnify.Views
                 //Retrieve all songs from the folders
                 allSongs = FileService.GetAllSongs(folderList);
 
-                songListView.SetSongs(allSongs);
-
                 //Check if send full list or just searched List
                 if (String.IsNullOrWhiteSpace(searchText))
-                    ViewModel.SongList = allSongs;
+                    return allSongs;
                 else
-                    ViewModel.SongList = new ObservableCollection<SongInfoModel>(allSongs.Where(song => song.Name.ToLower().Contains(searchText.ToLower())));
-
-
+                    return new ObservableCollection<SongInfoModel>(allSongs.Where(song => song.Name.ToLower().Contains(searchText.ToLower())));
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return null;
             };
         }
 

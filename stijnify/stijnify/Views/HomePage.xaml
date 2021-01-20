@@ -20,7 +20,7 @@
                        x:Name="songSearchBar"
                        ></SearchBar>
 
-                <component:SongList x:Name="songListView" BindingContext="{Binding}"/>
+                <component:SongList x:Name="songListView"/>
             </StackLayout>
 
             <!-- MediaPlayer -->
