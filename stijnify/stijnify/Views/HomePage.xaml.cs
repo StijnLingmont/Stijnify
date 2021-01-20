@@ -19,6 +19,7 @@ using stijnify.Model;
 using MediaManager.Playback;
 using stijnify.Data;
 using DynamicData;
+using stijnify.Views.Component;
 
 namespace stijnify.Views
 {
@@ -37,17 +38,7 @@ namespace stijnify.Views
 
             BindingContext = ViewModel = new HomePageModel();
 
-            Constants.MediaPlayer.StateChanged += MediaPlayer_StateChanged;
-
             GetAllFiles();
-        }
-
-        private void MediaPlayer_StateChanged(object sender, StateChangedEventArgs e)
-        {
-            var queue = ((MainPage)Application.Current.MainPage).QueueService;
-            var songItem = queue.GetQueueItem();
-            var foundSongItem = ViewModel.SongList.Where(e => e.Name == songItem.Name).FirstOrDefault();
-            songListView.SelectedItem = foundSongItem;
         }
 
         /// <summary>
@@ -71,6 +62,8 @@ namespace stijnify.Views
 
                 //Retrieve all songs from the folders
                 allSongs = FileService.GetAllSongs(folderList);
+
+                songListView.SetSongs(allSongs);
 
                 //Check if send full list or just searched List
                 if (String.IsNullOrWhiteSpace(searchText))
@@ -108,91 +101,6 @@ namespace stijnify.Views
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             GetAllFiles(e.NewTextValue);
-        }
-
-        #region Song Options
-
-        /// <summary>
-        /// Event when options for song are clicked
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void SongOptions_Clicked(object sender, EventArgs e)
-        {
-            SongInfoModel songInfo = (SongInfoModel)((ImageButton)sender).CommandParameter;
-            var response = await DisplayActionSheet("Song Options", "Cancel", null,"Delete file" ,"Add To PlayList", "Add To Queue");
-
-            if (response.ToLower() == "delete file")
-            {
-                DeleteSong(songInfo.Path);
-            }
-            else if (response.ToLower() == "add to queue")
-            {
-                AddToQueue(songInfo);
-            }
-            else if (response.ToLower() == "add to playlist")
-            {
-                StoreSongToPlayList(songInfo);
-            }
-        }
-
-        private async void StoreSongToPlayList(SongInfoModel song)
-        {
-            var playlists = new PlayListRepository().GetPlayLists();
-            List<string> playListChooseList = new List<string>();
-
-            foreach(var playlist in playlists)
-            {
-                playListChooseList.Add(playlist.Title);
-            }
-
-            var result = await DisplayActionSheet("Choose Playlist", "cancel", null, playListChooseList.ToArray());
-
-            if (result == "cancel") return;
-
-            var chosenPlaylist = playlists.Where(playlist => playlist.Title == result).FirstOrDefault();
-
-            var database = new SongRepository();
-            song.PlayListId = chosenPlaylist.Id;
-            database.AddSongToPlayList(song);
-        }
-
-        /// <summary>
-        /// All actions needed for deleting a song
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        private async void DeleteSong(string path)
-        {
-            bool deletedStatus = false;
-            string searchText = null;
-            bool deleteResponse = await DisplayAlert("Delete song", "Are you sure you want to delete this song?", "Delete", "Cancel");
-            if (deleteResponse)
-                deletedStatus = FileService.DeleteFile(path);
-
-            if (!deletedStatus)
-                return;
-
-            if (!String.IsNullOrEmpty(songSearchBar.Text))
-                searchText = songSearchBar.Text;
-
-            GetAllFiles(searchText);
-        }
-
-        private void AddToQueue(SongInfoModel song)
-        {
-            var queue = ((MainPage)Application.Current.MainPage).QueueService;
-            queue.StoreQueueItem(song);
-        }
-        #endregion
-
-        private void PlaySong_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            var songInfo = (SongInfoModel)e.Item;
-            var listItemSource = ((ListView)sender).ItemsSource;
-            var fullSongList = listItemSource.Cast<SongInfoModel>().ToList();
-
-            MediaPlayerService.SelectSong(songInfo, fullSongList);
         }
     }
 }

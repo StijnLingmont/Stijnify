@@ -12,14 +12,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="6.0.0" />
-    <PackageReference Include="Plugin.MediaManager" Version="1.0.4" />
-    <PackageReference Include="Plugin.MediaManager.Forms" Version="1.0.4" />
+    <PackageReference Include="Autofac" Version="6.1.0" />
+    <PackageReference Include="Plugin.MediaManager" Version="1.0.8" />
+    <PackageReference Include="Plugin.MediaManager.Forms" Version="1.0.8" />
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
-    <PackageReference Include="ReactiveUI" Version="12.1.5" />
+    <PackageReference Include="ReactiveUI" Version="13.0.38" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.1141" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
     <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.1.41" />
   </ItemGroup>
 
@@ -37,6 +37,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Component\MediaPlayer.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Component\SongList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\HomePage.xaml">

@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -25,7 +26,8 @@ namespace stijnify.Views.Component
     {
         MediaPlayerModel ViewModel { get; set; }
         IMediaPlayerService _mediaPlayerService;
-        bool _canProgress = true;
+        bool _progressBarIsDragging = true;
+        Timer _progressTimer = null;
 
         public MediaPlayer()
         {
@@ -41,14 +43,8 @@ namespace stijnify.Views.Component
         void InitEvents()
         {
             Constants.MediaPlayer.StateChanged += StateChanged;
-            Constants.MediaPlayer.PositionChanged += CurrentSong_PositionChanged;
+            //Constants.MediaPlayer.PositionChanged += CurrentSong_PositionChanged;
             Constants.MediaPlayer.MediaItemFinished += MediaPlayer_MediaItemFinished;
-            Constants.MediaPlayer.BufferedChanged += MediaPlayer_BufferedChanged;
-        }
-
-        private void MediaPlayer_BufferedChanged(object sender, BufferedChangedEventArgs e)
-        {
-            Console.WriteLine(e.Buffered);
         }
 
         private void MediaPlayer_MediaItemFinished(object sender, MediaManager.Media.MediaItemEventArgs e)
@@ -72,10 +68,32 @@ namespace stijnify.Views.Component
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CurrentSong_PositionChanged(object sender, PositionChangedEventArgs e)
+        //private void CurrentSong_PositionChanged(object sender, PositionChangedEventArgs e)
+        //{
+        //    //Calculate maximum of the song
+        //    var song = (MediaManagerBase)sender;
+        //    int maxTotalSeconds = (int)song.Duration.TotalSeconds;
+        //    string maxMinutes = Math.Floor(song.Duration.TotalMinutes).ToString("00");
+        //    string maxSeconds = song.Duration.Seconds.ToString("00");
+
+        //    //Max song progress
+        //    ViewModel.MaxLengthSong = $"{maxMinutes}:{maxSeconds}";
+        //    ViewModel.MaxSecondsSong = maxTotalSeconds;
+
+        //    //Update progress if possible
+        //    if (_canProgress)
+        //    {
+        //        int totalSeconds = (int)e.Position.TotalSeconds;
+        //        ViewModel.ProgressSecondsSong = totalSeconds;
+        //    }
+        //}
+
+        private void MyMethod()
         {
             //Calculate maximum of the song
-            var song = (MediaManagerBase)sender;
+            var song = Constants.MediaPlayer.Queue.Current;
+            var position = Constants.MediaPlayer.Position;
+
             int maxTotalSeconds = (int)song.Duration.TotalSeconds;
             string maxMinutes = Math.Floor(song.Duration.TotalMinutes).ToString("00");
             string maxSeconds = song.Duration.Seconds.ToString("00");
@@ -85,12 +103,16 @@ namespace stijnify.Views.Component
             ViewModel.MaxSecondsSong = maxTotalSeconds;
 
             //Update progress if possible
-            if (_canProgress)
-            {
-                int totalSeconds = (int)e.Position.TotalSeconds;
-                ViewModel.ProgressSecondsSong = totalSeconds;
-            }
+            if (_progressBarIsDragging)
+                {
+                    int totalSeconds = (int)position.TotalSeconds;
+                    ViewModel.ProgressSecondsSong = totalSeconds;
 
+                    string minutes = Math.Floor(position.TotalMinutes).ToString("00");
+                    string seconds = position.Seconds.ToString("00");
+
+                    ViewModel.ProgressLengthSong = $"{minutes}:{seconds}";
+            }
         }
 
         /// <summary>
@@ -101,10 +123,25 @@ namespace stijnify.Views.Component
         void StateChanged(object sender, StateChangedEventArgs e)
         {
             var state = e.State;
+            _progressTimer = null;
             if (state == MediaManager.Player.MediaPlayerState.Playing)
+            {
                 ViewModel.PlayPause = "pause";
+                var startTimeSpan = TimeSpan.Zero;
+                var periodTimeSpan = TimeSpan.FromMilliseconds(500);
+
+                if(_progressTimer == null)
+                {
+                    _progressTimer = new Timer((e) =>
+                    {
+                        MyMethod();
+                    }, null, startTimeSpan, periodTimeSpan);
+                }
+            }
             else if (state == MediaPlayerState.Paused || state == MediaPlayerState.Stopped)
+            {
                 ViewModel.PlayPause = "play";
+            }
         }
 
         #endregion
@@ -136,7 +173,7 @@ namespace stijnify.Views.Component
 
             _mediaPlayerService.ChangePosition(newTimeSong);
 
-            _canProgress = true;
+            _progressBarIsDragging = true;
         }
 
         /// <summary>
@@ -149,13 +186,16 @@ namespace stijnify.Views.Component
             if (ViewModel == null)
                 return;
 
-            var slider = (Slider)sender;
+            if(!_progressBarIsDragging)
+            {
+                var slider = (Slider)sender;
 
-            TimeSpan newTimeSong = TimeSpan.FromSeconds(slider.Value);
-            string minutes = Math.Floor(newTimeSong.TotalMinutes).ToString("00");
-            string seconds = newTimeSong.Seconds.ToString("00");
+                TimeSpan newTimeSong = TimeSpan.FromSeconds(slider.Value);
+                string minutes = Math.Floor(newTimeSong.TotalMinutes).ToString("00");
+                string seconds = newTimeSong.Seconds.ToString("00");
 
-            ViewModel.ProgressLengthSong = $"{minutes}:{seconds}";
+                ViewModel.ProgressLengthSong = $"{minutes}:{seconds}";
+            }
         }
 
         /// <summary>
@@ -165,7 +205,7 @@ namespace stijnify.Views.Component
         /// <param name="e"></param>
         private void progresSlider_DragStarted(object sender, EventArgs e)
         {
-            _canProgress = false;
+            _progressBarIsDragging = false;
         }
 
         /// <summary>

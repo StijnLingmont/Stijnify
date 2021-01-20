@@ -1,4 +1,5 @@
 ﻿using stijnify.Interfaces;
+using stijnify.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,14 +39,12 @@ namespace stijnify.Views.Temp_Views
             }
 
             directoriesList.ItemsSource = allDirectories;
-
-            GetFolderStructure();
         }
 
         /// <summary>
         /// Get all folders in the selected Folder
         /// </summary>
-        void GetFolderStructure()
+        async void GetFolderStructure()
         {
             try
             {

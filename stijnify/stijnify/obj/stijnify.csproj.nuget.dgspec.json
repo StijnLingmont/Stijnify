@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Stijn\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\stijnify.csproj": {}
+    "D:\\Stijn\\Development\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\stijnify.csproj": {}
   },
   "projects": {
-    "D:\\Stijn\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\stijnify.csproj": {
+    "D:\\Stijn\\Development\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\stijnify.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Stijn\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\stijnify.csproj",
+        "projectUniqueName": "D:\\Stijn\\Development\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\stijnify.csproj",
         "projectName": "stijnify",
-        "projectPath": "D:\\Stijn\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\stijnify.csproj",
+        "projectPath": "D:\\Stijn\\Development\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\stijnify.csproj",
         "packagesPath": "C:\\Users\\Werk\\.nuget\\packages\\",
-        "outputPath": "D:\\Stijn\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\obj\\",
+        "outputPath": "D:\\Stijn\\Development\\Projecten\\Mobile Development\\stijnify\\stijnify\\stijnify\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -44,7 +44,7 @@
           "dependencies": {
             "Autofac": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[6.1.0, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",
@@ -54,11 +54,11 @@
             },
             "Plugin.MediaManager": {
               "target": "Package",
-              "version": "[1.0.4, )"
+              "version": "[1.0.8, )"
             },
             "Plugin.MediaManager.Forms": {
               "target": "Package",
-              "version": "[1.0.4, )"
+              "version": "[1.0.8, )"
             },
             "Plugin.Permissions": {
               "target": "Package",
@@ -66,15 +66,15 @@
             },
             "ReactiveUI": {
               "target": "Package",
-              "version": "[12.1.5, )"
+              "version": "[13.0.38, )"
             },
             "Xamarin.Essentials": {
               "target": "Package",
-              "version": "[1.5.3.2, )"
+              "version": "[1.6.0, )"
             },
             "Xamarin.Forms": {
               "target": "Package",
-              "version": "[4.6.0.1141, )"
+              "version": "[5.0.0.1874, )"
             },
             "Xamarin.Plugin.FilePicker": {
               "target": "Package",
