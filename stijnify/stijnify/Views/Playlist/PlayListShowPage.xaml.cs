@@ -1,4 +1,5 @@
 ﻿using stijnify.Data;
+using stijnify.Enum;
 using stijnify.Model;
 using stijnify.Services;
 using System;
@@ -33,17 +34,16 @@ namespace stijnify.Views
             selectedPlayListTitle.Text = playlist.Title;
 
             database = new SongRepository();
-            GetSongsFromPlayList();
+
+            playlistSongList.InitSongList(GetSongsFromPlayList, SongListType.Playlist);
         }
 
         /// <summary>
         /// Retrieve songs from playlist
         /// </summary>
-        private void GetSongsFromPlayList()
+        ObservableCollection<SongInfoModel> GetSongsFromPlayList(string searchText = null)
         {
-            ObservableCollection<SongInfoModel> songs = new ObservableCollection<SongInfoModel>(database.GetSongsOfPlayList(playlist));
-
-            playlistSongList.ItemsSource = songs;
+            return new ObservableCollection<SongInfoModel>(database.GetSongsOfPlayList(playlist));
         }
 
         /// <summary>
