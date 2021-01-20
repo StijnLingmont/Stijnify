@@ -55,54 +55,5 @@ namespace stijnify.Views
         {
             Navigation.PopAsync();
         }
-
-        /// <summary>
-        /// Event for item tapped
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void playlistSongList_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            var songInfo = (SongInfoModel)e.Item;
-            var listItemSource = ((ListView)sender).ItemsSource;
-            var fullSongList = listItemSource.Cast<SongInfoModel>().ToList();
-
-            MediaPlayerService.SelectSong(songInfo, fullSongList);
-        }
-
-        /// <summary>
-        /// Event for options of a song
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void PlaylistItemOption_Clicked(object sender, EventArgs e)
-        {
-            SongInfoModel songInfo = (SongInfoModel)((ImageButton)sender).CommandParameter;
-            var response = await DisplayActionSheet("Song Options", "Cancel", null, "Delete file", "Add To Queue");
-
-            if (response.ToLower() == "delete file")
-            {
-                await DeleteFromPlaylist(songInfo);
-            }
-            else if (response.ToLower() == "add to queue")
-            {
-
-            }
-
-            GetSongsFromPlayList();
-        }
-
-        /// <summary>
-        /// All actions needed for deleting a song
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        private async Task DeleteFromPlaylist(SongInfoModel song)
-        {
-            bool deleteResponse = await DisplayAlert("Delete song from playlist", "Are you sure you want to delete this song from your playlist?", "Delete", "Cancel");
-            
-            if (deleteResponse)
-                database.RemoveSongFromPlayList(song);
-        }
     }
 }
