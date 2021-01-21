@@ -63,32 +63,7 @@ namespace stijnify.Views.Component
 
         #region MediaPlayer Events
 
-        /// <summary>
-        /// Event for when Song Position has been changed.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void CurrentSong_PositionChanged(object sender, PositionChangedEventArgs e)
-        //{
-        //    //Calculate maximum of the song
-        //    var song = (MediaManagerBase)sender;
-        //    int maxTotalSeconds = (int)song.Duration.TotalSeconds;
-        //    string maxMinutes = Math.Floor(song.Duration.TotalMinutes).ToString("00");
-        //    string maxSeconds = song.Duration.Seconds.ToString("00");
-
-        //    //Max song progress
-        //    ViewModel.MaxLengthSong = $"{maxMinutes}:{maxSeconds}";
-        //    ViewModel.MaxSecondsSong = maxTotalSeconds;
-
-        //    //Update progress if possible
-        //    if (_canProgress)
-        //    {
-        //        int totalSeconds = (int)e.Position.TotalSeconds;
-        //        ViewModel.ProgressSecondsSong = totalSeconds;
-        //    }
-        //}
-
-        private void MyMethod()
+        private void PositionUpdate()
         {
             //Calculate maximum of the song
             var song = Constants.MediaPlayer.Queue.Current;
@@ -134,7 +109,7 @@ namespace stijnify.Views.Component
                 {
                     _progressTimer = new Timer((e) =>
                     {
-                        MyMethod();
+                        PositionUpdate();
                     }, null, startTimeSpan, periodTimeSpan);
                 }
             }

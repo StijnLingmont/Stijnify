@@ -16,6 +16,7 @@ namespace stijnify.Model
             _StandardQueue = new List<SongInfoModel>();
             _CustomQueue = new List<SongInfoModel>();
             _CustomSelectedSong = -1;
+            _StandardSelectedSong = -1;
         }
     }
 }
