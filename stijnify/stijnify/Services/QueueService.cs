@@ -20,6 +20,7 @@ namespace stijnify.Services
         {
             int queueItemIndex;
             bool getCustomItem = _queue._CustomQueue.Count > 0 && _queue._CustomSelectedSong >= 0;
+            bool getStandardItem = _queue._StandardQueue.Count > 0 && _queue._StandardSelectedSong >= 0;
 
             //Check if there is added custom queue items
             if (getCustomItem)
@@ -27,12 +28,13 @@ namespace stijnify.Services
                 queueItemIndex = _queue._CustomSelectedSong;
                 return _queue._CustomQueue[queueItemIndex];
             }
-            else
+            else if (getStandardItem)
             {
                 queueItemIndex = _queue._StandardSelectedSong;
                 return _queue._StandardQueue[queueItemIndex];
             }
 
+            return null;
         }
 
         public void RemoveCustomQueueItem(SongInfoModel song)

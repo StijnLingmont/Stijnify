@@ -74,9 +74,12 @@ namespace stijnify.Views.Component
         {
             var queue = ((MainPage)Application.Current.MainPage).QueueService;
             var songItem = queue.GetQueueItem();
-            var foundSongItem = ViewModel.SongList.Where(e => e.Name == songItem.Name).FirstOrDefault();
+            if(songItem != null)
+            {
+                var foundSongItem = ViewModel.SongList.Where(e => e.Name == songItem.Name).FirstOrDefault();
 
-            songListView.SelectedItem = foundSongItem;
+                songListView.SelectedItem = foundSongItem;
+            }
         }
 
         /// <summary>
