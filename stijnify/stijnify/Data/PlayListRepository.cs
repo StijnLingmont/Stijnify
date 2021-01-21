@@ -4,6 +4,7 @@ using stijnify.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -42,6 +43,12 @@ namespace stijnify.Data
         public void DeletePlayList(PlayListModel playlist)
         {
             _connection.Delete(playlist);
+        }
+
+        public int CountSongsPlayList(PlayListModel playlist)
+        {
+            var result = _connection.Query<SongInfoModel>($"SELECT * FROM SongInfoModel WHERE PlayListId = {playlist.Id}").ToList();
+            return result.Count;
         }
     }
 }

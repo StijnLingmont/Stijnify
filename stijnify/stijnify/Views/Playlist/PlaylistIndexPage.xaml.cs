@@ -78,12 +78,34 @@ namespace stijnify.Views
         {
             var playlist = (PlayListModel)((ImageButton)sender).BindingContext;
 
-            var chosenOption = await DisplayActionSheet("Playlist options", "Cancel", null, "Delete playlist");
+            var chosenOption = await DisplayActionSheet("Playlist options", "Cancel", null, "Delete playlist", "Playlist info");
 
             if (chosenOption.ToLower() == "delete playlist")
                 database.DeletePlayList(playlist);
+            if (chosenOption.ToLower() == "playlist info")
+                PlayListInfo(playlist);
 
             RetrievePlayList();
+        }
+
+        private async void PlayListInfo(PlayListModel playlist)
+        {
+            string playlistInfoMessage = "";
+            // List of all the lines in playlist info popup
+            string[] playlistInfo = {
+                "Id: " + playlist.Id,
+                "Title: " + playlist.Title,
+                "Amount of songs: " + database.CountSongsPlayList(playlist)
+            };
+
+            // Loop trough all the lines and put them in one string to show as message in DisplayAlert
+            foreach(string infoItem in playlistInfo)
+            {
+                playlistInfoMessage += infoItem + "\n";
+            }
+
+            //var test = database.CountSongsPlayList(playlist);
+            await DisplayAlert("Playlist info", playlistInfoMessage, "Close");
         }
 
         private void PlayListItem_ItemTapped(object sender, ItemTappedEventArgs e)
