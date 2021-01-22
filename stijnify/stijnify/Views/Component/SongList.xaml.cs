@@ -117,9 +117,10 @@ namespace stijnify.Views.Component
             SongInfoModel song = (SongInfoModel)((ImageButton)sender).CommandParameter; //Retrieve the chosen song
 
             List<string> options = new List<string>() {
-                "Delete file", 
+                "Delete file",
+                "Song info",
                 "Add To Queue",
-                "Add to Playlist"
+                "Add to Playlist",
             };
 
             //Check which page the list is in and add aditional items
@@ -150,6 +151,10 @@ namespace stijnify.Views.Component
             else if (optionSelected.ToLower() == "delete from playlist")
             {
                 DeleteFromPlaylist(song);
+            }
+            else if (optionSelected.ToLower() == "song info")
+            {
+                SongInfo(song);
             }
         }
 
@@ -219,6 +224,25 @@ namespace stijnify.Views.Component
                 _database.RemoveSongFromPlayList(song);
 
             LoadSongs();
+        }
+
+        private async void SongInfo(SongInfoModel song)
+        {
+            string songInfoMessage = "";
+            // List of all the lines in playlist info popup
+            string[] songInfo = {
+                "Title: " + song.Name,
+                "Path: " + song.Path,
+            };
+
+            // Loop trough all the lines and put them in one string to show as message in DisplayAlert
+            foreach (string infoItem in songInfo)
+            {
+                songInfoMessage += infoItem + "\n";
+            }
+
+            //var test = database.CountSongsPlayList(playlist);
+            await App.Current.MainPage.DisplayAlert("Playlist info", songInfoMessage, "Close");
         }
 
         #endregion
