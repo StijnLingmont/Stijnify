@@ -43,7 +43,13 @@ namespace stijnify.Views
         /// </summary>
         ObservableCollection<SongInfoModel> GetSongsFromPlayList(string searchText = null)
         {
-            return new ObservableCollection<SongInfoModel>(database.GetSongsOfPlayList(playlist));
+            var songsOfPlaylist = new ObservableCollection<SongInfoModel>(database.GetSongsOfPlayList(playlist));
+
+            //Check if send full list or just searched List
+            if (String.IsNullOrWhiteSpace(searchText))
+                return songsOfPlaylist;
+            else
+                return new ObservableCollection<SongInfoModel>(songsOfPlaylist.Where(song => song.Name.ToLower().Contains(searchText.ToLower())));
         }
 
         /// <summary>

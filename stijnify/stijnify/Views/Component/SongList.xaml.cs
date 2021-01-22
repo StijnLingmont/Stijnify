@@ -52,15 +52,26 @@ namespace stijnify.Views.Component
         /// <summary>
         /// Load the songs in the ListView
         /// </summary>
-        private void LoadSongs()
+        private void LoadSongs(string searchText = null)
         {
-            var songList = _songListRetrieveMethod(null);
+            var songList = _songListRetrieveMethod(searchText);
             ViewModel.SongList = songList;
             songListView.ItemsSource = ViewModel.SongList;
         }
         #endregion
 
         #region Events
+
+        /// <summary>
+        /// Event when character is entered in Search bar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LoadSongs(e.NewTextValue);
+        }
+
         private void songListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var songInfo = (SongInfoModel)e.Item;

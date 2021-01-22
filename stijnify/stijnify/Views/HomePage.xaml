@@ -10,16 +10,6 @@
     <ContentPage.Content>
         <AbsoluteLayout BackgroundColor="#36393F">
             <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 0.72" AbsoluteLayout.LayoutFlags="All">
-                <!-- Search Bar -->
-                <SearchBar Placeholder="Search..." 
-                       PlaceholderColor="Black" 
-                       TextColor="Black" 
-                       CancelButtonColor="Black" 
-                       BackgroundColor="White"
-                       TextChanged="SearchBar_TextChanged"
-                       x:Name="songSearchBar"
-                       ></SearchBar>
-
                 <component:SongList x:Name="songListView"/>
             </StackLayout>
 

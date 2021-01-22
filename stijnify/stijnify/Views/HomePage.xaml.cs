@@ -76,29 +76,5 @@ namespace stijnify.Views
                 return null;
             };
         }
-
-        /// <summary>
-        /// Event for refresh song list.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void songListView_Refreshing(object sender, EventArgs e)
-        {
-            var listView = (ListView)sender;
-
-            GetAllFiles();
-
-            listView.EndRefresh();
-        }
-
-        /// <summary>
-        /// Event when character is entered in Search bar
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            GetAllFiles(e.NewTextValue);
-        }
     }
 }
