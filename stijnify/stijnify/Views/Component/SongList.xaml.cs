@@ -131,6 +131,8 @@ namespace stijnify.Views.Component
 
             var response = await App.Current.MainPage.DisplayActionSheet("Song Options", "Cancel", null, options.ToArray());
 
+            if (response == null) return;
+
             RunSelectedOption(response, song);
         }
 
