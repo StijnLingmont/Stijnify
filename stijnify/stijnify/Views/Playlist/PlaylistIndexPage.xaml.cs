@@ -80,6 +80,8 @@ namespace stijnify.Views
 
             var chosenOption = await DisplayActionSheet("Playlist options", "Cancel", null, "Delete playlist", "Playlist info");
 
+            if (chosenOption == null) return;
+
             if (chosenOption.ToLower() == "delete playlist")
                 database.DeletePlayList(playlist);
             if (chosenOption.ToLower() == "playlist info")
