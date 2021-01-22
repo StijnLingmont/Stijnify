@@ -3,28 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="stijnify.Views.Component.SongList">
     <ContentView.Content>
-        <ListView x:Name="songListView" ItemsSource="{Binding SongList}" ItemTapped="songListView_ItemTapped" IsPullToRefreshEnabled="True" Refreshing="songListView_Refreshing">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid x:Name="song" Padding="10, 0, 10, 0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="20" />
-                            </Grid.ColumnDefinitions>
+        <StackLayout>
+            <!-- Search Bar -->
+            <SearchBar Placeholder="Search..." 
+                       PlaceholderColor="Black" 
+                       TextColor="Black" 
+                       CancelButtonColor="Black" 
+                       BackgroundColor="White"
+                       TextChanged="SearchBar_TextChanged"
+                       x:Name="songSearchBar"
+                       ></SearchBar>
 
-                            <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="0" TextColor="White" VerticalOptions="Center"></Label>
-                            <ImageButton Source="options"
+            <ListView x:Name="songListView" ItemsSource="{Binding SongList}" ItemTapped="songListView_ItemTapped" IsPullToRefreshEnabled="True" Refreshing="songListView_Refreshing">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid x:Name="song" Padding="10, 0, 10, 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="20" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="0" TextColor="White" VerticalOptions="Center"></Label>
+                                <ImageButton Source="options"
                                     Grid.Column="1" Grid.Row="0"
                                     VerticalOptions="CenterAndExpand" 
                                     BackgroundColor="Transparent"
                                     CommandParameter="{Binding Source={x:Reference song}, Path=BindingContext}"
                                     Clicked="SongOptions_Clicked"
                                 />
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </ContentView.Content>
 </ContentView>
