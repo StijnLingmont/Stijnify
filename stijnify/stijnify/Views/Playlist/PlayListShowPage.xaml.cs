@@ -20,7 +20,14 @@ namespace stijnify.Views
     {
         #region Variable Ínit
 
+        /// <summary>
+        /// Connection to the database and all his actions
+        /// </summary>
         SongRepository database { get; set; }
+
+        /// <summary>
+        /// The current selected playlist
+        /// </summary>
         private PlayListModel playlist { get; set; }
 
         #endregion
@@ -29,6 +36,7 @@ namespace stijnify.Views
         {
             InitializeComponent();
 
+            // Select the current playlist
             playlist = c_playlist;
 
             selectedPlayListTitle.Text = playlist.Title;

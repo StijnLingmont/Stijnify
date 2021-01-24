@@ -17,9 +17,26 @@ namespace stijnify.Views.Temp_Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class QueueView : ContentPage
     {
+        #region Init variables
+        
+        /// <summary>
+        /// All actions for the mediaplayer
+        /// </summary>
         IMediaPlayerService _mediaPlayerService;
+
+        /// <summary>
+        /// All actions for the queues
+        /// </summary>
         QueueService _queueService;
+
+        /// <summary>
+        /// The viewmodel of this contentpage
+        /// </summary>
         QueueModel ViewModel;
+
+        #endregion
+
+        #region Init
 
         public QueueView()
         {
@@ -33,11 +50,21 @@ namespace stijnify.Views.Temp_Views
             InitQueue();
         }
 
+        /// <summary>
+        /// Init the queue
+        /// </summary>
         private void InitQueue()
         {
             ViewModel.CustomQueue = new ObservableCollection<SongInfoModel>(_queueService._queue._CustomQueue);
         }
 
+        #endregion
+
+        /// <summary>
+        /// Remove an item from the queue
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QueueItemRemove_Clicked(object sender, EventArgs e)
         {
             SongInfoModel songInfo = (SongInfoModel)((ImageButton)sender).CommandParameter;

@@ -30,6 +30,7 @@ namespace stijnify.Views.Temp_Views
         {
             InitializeComponent();
 
+            //Make a list of all the directories
             var allFolders = DependencyService.Get<IExternalStorage>().GetBasePaths();
             ObservableCollection<string> allDirectories = new ObservableCollection<string>();
 

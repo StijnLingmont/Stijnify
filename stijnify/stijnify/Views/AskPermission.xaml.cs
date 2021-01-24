@@ -18,6 +18,11 @@ namespace stijnify.Views
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Ask for permission to storage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void AskPermission_Clicked(object sender, EventArgs e)
         {
             var status = await PermissionService.GrantReadPermission();

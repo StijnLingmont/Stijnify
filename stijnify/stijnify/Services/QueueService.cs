@@ -10,11 +10,19 @@ namespace stijnify.Services
 {
     public class QueueService : IQueueService
     {
+        #region Init
+
+        /// <summary>
+        /// Access to both queue lists
+        /// </summary>
         public QueueInfo _queue { get; set; }
+
         public QueueService()
         {
             _queue = new QueueInfo();
         }
+
+        #endregion
 
         public SongInfoModel GetQueueItem()
         {

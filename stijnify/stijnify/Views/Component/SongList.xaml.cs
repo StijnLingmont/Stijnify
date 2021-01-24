@@ -19,10 +19,29 @@ namespace stijnify.Views.Component
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SongList : ContentView
     {
+        #region Init variables
+
+        /// <summary>
+        /// Viewmodel of this component
+        /// </summary>
         SongListModel ViewModel;
+
+        /// <summary>
+        /// The function to retrieve the songs
+        /// </summary>
         Func<string, ObservableCollection<SongInfoModel>> _songListRetrieveMethod;
+
+        /// <summary>
+        /// the type of songlist
+        /// </summary>
         SongListType _songListType;
+
+        /// <summary>
+        /// The connection to the database and his action
+        /// </summary>
         SongRepository _database { get; set; }
+
+        #endregion
 
         #region Initialisation
         public SongList()
@@ -95,6 +114,11 @@ namespace stijnify.Views.Component
             LoadSongs(e.NewTextValue);
         }
 
+        /// <summary>
+        /// When a song is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void songListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var songInfo = (SongInfoModel)e.Item;
@@ -104,6 +128,11 @@ namespace stijnify.Views.Component
             MediaPlayerService.SelectSong(songInfo, fullSongList);
         }
 
+        /// <summary>
+        /// When the state of the mediaplayer changes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MediaPlayer_StateChanged(object sender, StateChangedEventArgs e)
         {
             SelectCurrentPlayingSong();
@@ -152,6 +181,11 @@ namespace stijnify.Views.Component
             RunSelectedOption(response, song);
         }
 
+        /// <summary>
+        /// Run trough all options and check which one is selected
+        /// </summary>
+        /// <param name="optionSelected"></param>
+        /// <param name="song"></param>
         private void RunSelectedOption(string optionSelected, SongInfoModel song)
         {
             if (optionSelected.ToLower() == "delete file")
@@ -223,6 +257,10 @@ namespace stijnify.Views.Component
             //GetAllFiles(searchText);
         }
 
+        /// <summary>
+        /// Add an item to the queue
+        /// </summary>
+        /// <param name="song"></param>
         private void AddToQueue(SongInfoModel song)
         {
             var queue = ((MainPage)Application.Current.MainPage).QueueService;
@@ -244,6 +282,10 @@ namespace stijnify.Views.Component
             LoadSongs();
         }
 
+        /// <summary>
+        /// Get information about the song
+        /// </summary>
+        /// <param name="song"></param>
         private async void SongInfo(SongInfoModel song)
         {
             string songInfoMessage = "";

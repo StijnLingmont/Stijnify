@@ -7,6 +7,7 @@ namespace stijnify.Model
 {
     public class Constants
     {
+        //The mediaplayer
         public static IMediaManager MediaPlayer = CrossMediaManager.Current;
     }
 }

@@ -16,7 +16,13 @@ namespace stijnify.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PlaylistIndexPage : ContentPage
     {
+        /// <summary>
+        /// Connection to the database and all his actions
+        /// </summary>
         PlayListRepository database;
+
+        #region Init
+
         public PlaylistIndexPage()
         {
             InitializeComponent();
@@ -34,6 +40,10 @@ namespace stijnify.Views
             var playlists = database.GetPlayLists();
             playlistList.ItemsSource = new ObservableCollection<PlayListModel>(playlists);
         }
+
+        #endregion
+
+        #region Events
 
         /// <summary>
         /// Event for adding Playlist
@@ -60,16 +70,6 @@ namespace stijnify.Views
         }
 
         /// <summary>
-        /// Retrieve the playlist
-        /// </summary>
-        private void RetrievePlayList()
-        {
-            //Get new list of playlist
-            var playlists = database.GetPlayLists();
-            playlistList.ItemsSource = new ObservableCollection<PlayListModel>(playlists);
-        }
-
-        /// <summary>
         /// Event clicking options for playlist
         /// </summary>
         /// <param name="sender"></param>
@@ -90,6 +90,29 @@ namespace stijnify.Views
             RetrievePlayList();
         }
 
+        private void PlayListItem_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var playlist = e.Item as PlayListModel;
+
+            Navigation.PushAsync(new PlayListShowPage(playlist));
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Retrieve the playlist
+        /// </summary>
+        private void RetrievePlayList()
+        {
+            //Get new list of playlist
+            var playlists = database.GetPlayLists();
+            playlistList.ItemsSource = new ObservableCollection<PlayListModel>(playlists);
+        }
+
+        /// <summary>
+        /// Get information about the playlist
+        /// </summary>
+        /// <param name="playlist"></param>
         private async void PlayListInfo(PlayListModel playlist)
         {
             string playlistInfoMessage = "";
@@ -108,13 +131,6 @@ namespace stijnify.Views
 
             //var test = database.CountSongsPlayList(playlist);
             await DisplayAlert("Playlist info", playlistInfoMessage, "Close");
-        }
-
-        private void PlayListItem_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            var playlist = e.Item as PlayListModel;
-
-            Navigation.PushAsync(new PlayListShowPage(playlist));
         }
     }
 }

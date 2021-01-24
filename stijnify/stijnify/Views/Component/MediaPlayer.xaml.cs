@@ -24,10 +24,31 @@ namespace stijnify.Views.Component
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MediaPlayer : ContentView
     {
+        #region Init variables
+
+        /// <summary>
+        /// The viewmodel of this component
+        /// </summary>
         MediaPlayerModel ViewModel { get; set; }
+
+        /// <summary>
+        /// The mediaplayer service to manage the mediaplayer
+        /// </summary>
         IMediaPlayerService _mediaPlayerService;
+
+        /// <summary>
+        /// Status if the progressbar is dragging
+        /// </summary>
         bool _progressBarIsDragging = false;
+
+        /// <summary>
+        /// The progress timer to check progress
+        /// </summary>
         Timer _progressTimer = null;
+
+        #endregion
+
+        #region Init component
 
         public MediaPlayer()
         {
@@ -40,17 +61,16 @@ namespace stijnify.Views.Component
             InitEvents();
         }
 
+        /// <summary>
+        /// Init all events
+        /// </summary>
         void InitEvents()
         {
             Constants.MediaPlayer.StateChanged += StateChanged;
-            //Constants.MediaPlayer.PositionChanged += CurrentSong_PositionChanged;
             Constants.MediaPlayer.MediaItemFinished += MediaPlayer_MediaItemFinished;
         }
 
-        private void MediaPlayer_MediaItemFinished(object sender, MediaManager.Media.MediaItemEventArgs e)
-        {
-            ResetBaseProgress();
-        }
+        #endregion
 
         /// <summary>
         /// Event for Reseting base progress
@@ -63,6 +83,19 @@ namespace stijnify.Views.Component
 
         #region MediaPlayer Events
 
+        /// <summary>
+        /// When the song is done
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MediaPlayer_MediaItemFinished(object sender, MediaManager.Media.MediaItemEventArgs e)
+        {
+            ResetBaseProgress();
+        }
+
+        /// <summary>
+        /// Update the position of the song
+        /// </summary>
         private void PositionUpdate()
         {
             //Calculate maximum of the song

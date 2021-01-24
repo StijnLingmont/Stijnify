@@ -23,6 +23,8 @@ namespace stijnify.Views
             SetFolderList();
         }
 
+        #region Events
+
         /// <summary>
         /// Event to add Folder
         /// </summary>
@@ -39,22 +41,6 @@ namespace stijnify.Views
             };
 
             await Navigation.PushModalAsync(DirectoryPickerView);
-        }
-
-        /// <summary>
-        /// Sets the list of all the Filers in the ListView
-        /// </summary>
-        void SetFolderList()
-        {
-            if(Preferences.ContainsKey("folders"))
-            {
-                var folders = Preferences.Get("folders", null);
-
-                ObservableCollection<string> folderList = new ObservableCollection<string>(folders.Split(','));
-
-                addedFolders.ItemsSource = folderList;
-            }
-
         }
 
         /// <summary>
@@ -77,7 +63,7 @@ namespace stijnify.Views
                 var foldersString = Preferences.Get("folders", null);
 
                 //Check if list is found
-                if(foldersString == null)
+                if (foldersString == null)
                     return;
 
                 //Convert the string in a list
@@ -97,6 +83,24 @@ namespace stijnify.Views
 
                 addedFolders.ItemsSource = folders;
             }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Sets the list of all the Filers in the ListView
+        /// </summary>
+        void SetFolderList()
+        {
+            if(Preferences.ContainsKey("folders"))
+            {
+                var folders = Preferences.Get("folders", null);
+
+                ObservableCollection<string> folderList = new ObservableCollection<string>(folders.Split(','));
+
+                addedFolders.ItemsSource = folderList;
+            }
+
         }
     }
 }
