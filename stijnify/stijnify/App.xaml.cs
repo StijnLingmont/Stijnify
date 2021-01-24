@@ -36,11 +36,12 @@ namespace stijnify
 
         protected override void OnSleep()
         {
+            base.OnSleep();
         }
 
         protected override void OnResume()
         {
-
+            base.OnResume();
         }
     }
 }
