@@ -47,6 +47,7 @@ namespace stijnify.Views.Component
             _songListType = songListType;
 
             LoadSongs();
+            SelectCurrentPlayingSong();
         }
 
         /// <summary>
@@ -57,6 +58,24 @@ namespace stijnify.Views.Component
             var songList = _songListRetrieveMethod(searchText);
             ViewModel.SongList = songList;
             songListView.ItemsSource = ViewModel.SongList;
+        }
+
+        /// <summary>
+        /// Select the song that is currently playing
+        /// </summary>
+        private void SelectCurrentPlayingSong()
+        {
+            var mainPage = (MainPage)Application.Current.MainPage;
+            if (mainPage == null) return;
+
+            var queue = mainPage.QueueService;
+            var songItem = queue.GetQueueItem();
+            if (songItem != null)
+            {
+                var foundSongItem = ViewModel.SongList.Where(e => e.Name == songItem.Name).FirstOrDefault();
+
+                songListView.SelectedItem = foundSongItem;
+            }
         }
         #endregion
 
@@ -83,14 +102,7 @@ namespace stijnify.Views.Component
 
         private void MediaPlayer_StateChanged(object sender, StateChangedEventArgs e)
         {
-            var queue = ((MainPage)Application.Current.MainPage).QueueService;
-            var songItem = queue.GetQueueItem();
-            if(songItem != null)
-            {
-                var foundSongItem = ViewModel.SongList.Where(e => e.Name == songItem.Name).FirstOrDefault();
-
-                songListView.SelectedItem = foundSongItem;
-            }
+            SelectCurrentPlayingSong();
         }
 
         /// <summary>
