@@ -56,6 +56,9 @@ namespace stijnify.Views.Component
         private void LoadSongs(string searchText = null)
         {
             var songList = _songListRetrieveMethod(searchText);
+            
+            if (songList == null) return; //Don't add songs to item list if there are not songs found
+
             ViewModel.SongList = songList;
             songListView.ItemsSource = ViewModel.SongList;
         }
@@ -65,7 +68,8 @@ namespace stijnify.Views.Component
         /// </summary>
         private void SelectCurrentPlayingSong()
         {
-            var mainPage = (MainPage)Application.Current.MainPage;
+            MainPage mainPage = Application.Current.MainPage as MainPage;
+            
             if (mainPage == null) return;
 
             var queue = mainPage.QueueService;
