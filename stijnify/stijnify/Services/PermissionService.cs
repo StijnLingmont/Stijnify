@@ -10,6 +10,10 @@ namespace stijnify.Services
 {
     public class PermissionService
     {
+		/// <summary>
+		/// Grand storage premissions to the user
+		/// </summary>
+		/// <returns>status of giving permissions</returns>
         public static async Task<bool> GrantReadPermission()
         {
 			try

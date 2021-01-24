@@ -27,17 +27,9 @@ namespace stijnify.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
-        #region Initialise Variables
-
-        HomePageModel ViewModel;
-
-        #endregion
-
         public HomePage()
         {
             InitializeComponent();
-
-            BindingContext = ViewModel = new HomePageModel();
 
             songListView.InitSongList(GetAllFiles, SongListType.AllSongs);
         }

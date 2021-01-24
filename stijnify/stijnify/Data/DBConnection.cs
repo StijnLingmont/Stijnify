@@ -9,6 +9,10 @@ namespace stijnify.Data
 {
     class DBConnection
     {
+        /// <summary>
+        /// Create a Database connection
+        /// </summary>
+        /// <returns>The database connection</returns>
         public static SQLiteConnection Initialise()
         {
             SQLiteConnection _connection;
