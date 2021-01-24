@@ -69,6 +69,8 @@ namespace stijnify.Views.Component
             var song = Constants.MediaPlayer.Queue.Current;
             var position = Constants.MediaPlayer.Position;
 
+            if (song == null) return;
+
             int maxTotalSeconds = (int)song.Duration.TotalSeconds;
             string maxMinutes = Math.Floor(song.Duration.TotalMinutes).ToString("00");
             string maxSeconds = song.Duration.Seconds.ToString("00");
@@ -115,6 +117,10 @@ namespace stijnify.Views.Component
             }
             else if (state == MediaPlayerState.Paused || state == MediaPlayerState.Stopped)
             {
+                //Remove the timer if the song is paused/stopped
+                if(_progressTimer != null)
+                    _progressTimer.Dispose();
+
                 ViewModel.PlayPause = "play";
             }
         }
